@@ -1,5 +1,6 @@
 package com.cookCycle.service;
 
+import com.cookCycle.model.Favorite;
 import com.cookCycle.model.User;
 
 import java.util.List;
@@ -10,4 +11,5 @@ public interface IUserService {
     boolean addUser(User user);
     void updateUser(User user);
     void deleteUser(String username);
+    List<Favorite> getAllFavoritesByUsername(String username);
 }

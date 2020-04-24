@@ -1,6 +1,8 @@
 package com.cookCycle.service;
 
+import com.cookCycle.model.Favorite;
 import com.cookCycle.model.User;
+import com.cookCycle.repository.FavoriteRepository;
 import com.cookCycle.repository.UserRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -12,6 +14,8 @@ import java.util.List;
 public class UserService implements IUserService {
     @Autowired
     private UserRepository userRepository;
+    @Autowired
+    private FavoriteRepository favoriteRepository;
 
     @Override
     public List<User> getAllUsers() {
@@ -45,5 +49,17 @@ public class UserService implements IUserService {
     @Override
     public void deleteUser(String username) {
         userRepository.delete(getUserByUsername(username));
+    }
+
+    @Override
+    public List<Favorite> getAllFavoritesByUsername(String username) {
+        List<Favorite> list = new ArrayList<Favorite>();
+        for (Favorite favorite:(List<Favorite>)favoriteRepository.findAll()) {
+            if (favorite.getUsername().equals(username)){
+                list.add(favorite);
+            }
+        }
+        return list;
+
     }
 }
