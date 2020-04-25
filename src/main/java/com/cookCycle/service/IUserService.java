@@ -10,6 +10,5 @@ public interface IUserService {
     User getUserByUsername(String username);
     boolean addUser(User user);
     void updateUser(User user);
-    void deleteUser(String username);
     List<Favorite> getAllFavoritesByUsername(String username);
 }

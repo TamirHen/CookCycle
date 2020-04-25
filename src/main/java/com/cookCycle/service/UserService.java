@@ -42,13 +42,16 @@ public class UserService implements IUserService {
     }
 
     @Override
-    public void updateUser(User user) {
-        userRepository.save(user);
-    }
+    public void updateUser(User updatedUserWithTheSameUsername) { // to update user, the user provided must be with the same username (username can not be updated).
+        List<User> list = (List<User>) userRepository.findAll();
+        for (User u:list) {
+            if (u.getUsername().equals(updatedUserWithTheSameUsername.getUsername())) {
+                userRepository.save(updatedUserWithTheSameUsername);
+                return;
+            }
+        }
+        System.out.println(" ---- No user to update ---- ");
 
-    @Override
-    public void deleteUser(String username) {
-        userRepository.delete(getUserByUsername(username));
     }
 
     @Override

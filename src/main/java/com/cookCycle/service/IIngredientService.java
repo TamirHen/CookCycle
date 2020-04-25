@@ -7,7 +7,4 @@ import java.util.List;
 public interface IIngredientService {
     List<Ingredient> getAllIngredients();
     Ingredient getIngredientById(int ingredientId);
-    boolean addIngredient(Ingredient ingredient);
-    void updateIngredient(Ingredient ingredient);
-    void deleteIngredient(int ingredientId);
 }

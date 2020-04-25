@@ -25,25 +25,4 @@ public class RecipeService implements IRecipeService {
         Recipe obj = recipeRepository.findById(recipeId).get();
         return obj;
     }
-
-    @Override
-    public boolean addRecipe(Recipe recipe) {
-        List<Recipe> list = (List<Recipe>) recipeRepository.findAll();
-        if (list == null) return false;
-        for (Recipe r:list) {
-            if (recipe.getApiId() == r.getApiId()) return false;
-        }
-            recipeRepository.save(recipe);
-            return true;
-    }
-
-    @Override
-    public void updateRecipe(Recipe recipe) {
-        recipeRepository.save(recipe);
-    }
-
-    @Override
-    public void deleteRecipe(int recipeId) {
-        recipeRepository.delete(getRecipeById(recipeId));
-    }
 }

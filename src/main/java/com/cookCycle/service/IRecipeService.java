@@ -7,7 +7,4 @@ import java.util.List;
 public interface IRecipeService {
     List<Recipe> getAllRecipes();
     Recipe getRecipeById(int recipeId);
-    boolean addRecipe(Recipe recipe);
-    void updateRecipe(Recipe recipe);
-    void deleteRecipe(int recipeId);
 }

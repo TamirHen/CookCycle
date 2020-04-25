@@ -25,25 +25,4 @@ public class RecipeCategoryService implements IRecipeCategoryService {
         RecipeCategory obj = recipeCategoryRepository.findById(recipeCategoryId).get();
         return obj;
     }
-
-    @Override
-    public boolean addRecipeCategory(RecipeCategory recipeCategory) {
-        List<RecipeCategory> list = (List<RecipeCategory>) recipeCategoryRepository.findAll();
-        if (list == null) return false;
-        for (RecipeCategory r:list) {
-            if (recipeCategory.getName() == r.getName()) return false;
-        }
-        recipeCategoryRepository.save(recipeCategory);
-        return true;
-    }
-
-    @Override
-    public void updateRecipeCategory(RecipeCategory recipeCategory) {
-        recipeCategoryRepository.save(recipeCategory);
-    }
-
-    @Override
-    public void deleteRecipeCategory(int recipeCategoryId) {
-        recipeCategoryRepository.delete(getRecipeCategoryById(recipeCategoryId));
-    }
 }

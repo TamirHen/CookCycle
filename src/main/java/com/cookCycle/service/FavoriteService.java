@@ -60,11 +60,6 @@ public class FavoriteService implements IFavoriteService {
     }
 
     @Override
-    public void updateFavorite(Favorite favorite) {
-        favoriteRepository.save(favorite);
-    }
-
-    @Override
     public void deleteFavorite(int favoriteId) {
         favoriteRepository.delete(getFavoriteById(favoriteId));
     }

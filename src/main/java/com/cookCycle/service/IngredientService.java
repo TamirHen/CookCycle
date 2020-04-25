@@ -25,25 +25,4 @@ public class IngredientService implements IIngredientService {
         Ingredient obj = ingredientRepository.findById(ingredientId).get();
         return obj;
     }
-
-    @Override
-    public boolean addIngredient(Ingredient ingredient) {
-        List<Ingredient> list = (List<Ingredient>) ingredientRepository.findAll();
-        if (list == null) return false;
-        for (Ingredient r:list) {
-            if (ingredient.getApiId() == r.getApiId()) return false;
-        }
-            ingredientRepository.save(ingredient);
-            return true;
-    }
-
-    @Override
-    public void updateIngredient(Ingredient ingredient) {
-        ingredientRepository.save(ingredient);
-    }
-
-    @Override
-    public void deleteIngredient(int ingredientId) {
-        ingredientRepository.delete(getIngredientById(ingredientId));
-    }
 }

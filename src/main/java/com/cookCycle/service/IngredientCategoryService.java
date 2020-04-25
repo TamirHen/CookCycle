@@ -26,24 +26,4 @@ public class IngredientCategoryService implements IIngredientCategoryService {
         return obj;
     }
 
-    @Override
-    public boolean addIngredientCategory(IngredientCategory ingredientCategory) {
-        List<IngredientCategory> list = (List<IngredientCategory>) ingredientCategoryRepository.findAll();
-        if (list == null) return false;
-        for (IngredientCategory r:list) {
-            if (ingredientCategory.getName() == r.getName()) return false;
-        }
-        ingredientCategoryRepository.save(ingredientCategory);
-        return true;
-    }
-
-    @Override
-    public void updateIngredientCategory(IngredientCategory ingredientCategory) {
-        ingredientCategoryRepository.save(ingredientCategory);
-    }
-
-    @Override
-    public void deleteIngredientCategory(int ingredientCategoryId) {
-        ingredientCategoryRepository.delete(getIngredientCategoryById(ingredientCategoryId));
-    }
 }

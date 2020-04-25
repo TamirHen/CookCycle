@@ -25,26 +25,4 @@ public class IngredientsInRecipesService implements IIngredientsInRecipesService
         IngredientsInRecipes obj = ingredientsInRecipesRepository.findById(ingredientsInRecipesId).get();
         return obj;
     }
-
-    @Override
-    public boolean addIngredientsInRecipes(IngredientsInRecipes ingredientsInRecipes) {
-        List<IngredientsInRecipes> list = (List<IngredientsInRecipes>) ingredientsInRecipesRepository.findAll();
-        if (list == null) return false;
-        for (IngredientsInRecipes r:list) {
-            if (r.getId() == 0) return false; // Check that r has valid id.
-            if (ingredientsInRecipes.getId() == r.getId()) return false;
-        }
-        ingredientsInRecipesRepository.save(ingredientsInRecipes);
-        return true;
-    }
-
-    @Override
-    public void updateIngredientsInRecipes(IngredientsInRecipes ingredientsInRecipes) {
-        ingredientsInRecipesRepository.save(ingredientsInRecipes);
-    }
-
-    @Override
-    public void deleteIngredientsInRecipes(int ingredientsInRecipesId) {
-        ingredientsInRecipesRepository.delete(getIngredientsInRecipesById(ingredientsInRecipesId));
-    }
 }
