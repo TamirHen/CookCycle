@@ -31,27 +31,4 @@ public class IngredientCategoryController {
         return new ResponseEntity<List<IngredientCategory>>(list, HttpStatus.OK);
     }
 
-//    @PostMapping(path = "/add")
-//    public ResponseEntity<Void> addIngredientCategory(@RequestBody IngredientCategory ingredientCategory, UriComponentsBuilder builder) {
-//        boolean flag = ingredientCategoryService.addIngredientCategory(ingredientCategory);
-//        if (flag == false) {
-//            return new ResponseEntity<Void>(HttpStatus.CONFLICT);
-//        }
-//        HttpHeaders headers = new HttpHeaders();
-//        headers.setLocation(builder.path("/add/{id}").buildAndExpand(ingredientCategory.getId()).toUri());
-//        return new ResponseEntity<Void>(headers, HttpStatus.CREATED);
-//    }
-//
-//    @PutMapping("ingredientCategory")
-//    public ResponseEntity<IngredientCategory> updateArticle(@RequestBody IngredientCategory ingredientCategory) {
-//        ingredientCategoryService.updateIngredientCategory(ingredientCategory);
-//        return new ResponseEntity<IngredientCategory>(ingredientCategory, HttpStatus.OK);
-//    }
-//
-//    @DeleteMapping("ingredientCategory/{id}")
-//    public ResponseEntity<Void> deleteIngredientCategory(@PathVariable("id") Integer id) {
-//        ingredientCategoryService.deleteIngredientCategory(id);
-//        return new ResponseEntity<Void>(HttpStatus.NO_CONTENT);
-//    }
-
 }

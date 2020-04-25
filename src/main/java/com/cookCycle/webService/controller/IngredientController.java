@@ -31,27 +31,4 @@ public class IngredientController {
         return new ResponseEntity<List<Ingredient>>(list, HttpStatus.OK);
     }
 
-//    @PostMapping(path = "/add")
-//    public ResponseEntity<Void> addIngredient(@RequestBody Ingredient ingredient, UriComponentsBuilder builder) {
-//        boolean flag = ingredientService.addIngredient(ingredient);
-//        if (flag == false) {
-//            return new ResponseEntity<Void>(HttpStatus.CONFLICT);
-//        }
-//        HttpHeaders headers = new HttpHeaders();
-//        headers.setLocation(builder.path("/add/{id}").buildAndExpand(ingredient.getId()).toUri());
-//        return new ResponseEntity<Void>(headers, HttpStatus.CREATED);
-//    }
-//
-//    @PutMapping("ingredient")
-//    public ResponseEntity<Ingredient> updateArticle(@RequestBody Ingredient ingredient) {
-//        ingredientService.updateIngredient(ingredient);
-//        return new ResponseEntity<Ingredient>(ingredient, HttpStatus.OK);
-//    }
-//
-//    @DeleteMapping("ingredient/{id}")
-//    public ResponseEntity<Void> deleteIngredient(@PathVariable("id") Integer id) {
-//        ingredientService.deleteIngredient(id);
-//        return new ResponseEntity<Void>(HttpStatus.NO_CONTENT);
-//    }
-
 }

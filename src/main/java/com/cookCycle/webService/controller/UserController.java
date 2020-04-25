@@ -48,17 +48,10 @@ public class UserController {
         return new ResponseEntity<List<Favorite>>(favorites, HttpStatus.OK);
     }
 
-//
-//    @PutMapping("user")
-//    public ResponseEntity<User> updateArticle(@RequestBody User user) {
-//        userService.updateUser(user);
-//        return new ResponseEntity<User>(user, HttpStatus.OK);
-//    }
-//
-//    @DeleteMapping("user/{id}")
-//    public ResponseEntity<Void> deleteUser(@PathVariable("id") Integer id) {
-//        userService.deleteUser(id);
-//        return new ResponseEntity<Void>(HttpStatus.NO_CONTENT);
-//    }
+    @PutMapping("user")
+    public ResponseEntity<User> updateArticle(@RequestBody User user) {
+        userService.updateUser(user);
+        return new ResponseEntity<User>(user, HttpStatus.OK);
+    }
 
 }

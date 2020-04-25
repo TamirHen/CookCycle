@@ -40,12 +40,6 @@ public class FavoriteController {
         headers.setLocation(builder.path("/add/{id}").buildAndExpand(favorite.getId()).toUri());
         return new ResponseEntity<Void>(headers, HttpStatus.CREATED);
     }
-//
-//    @PutMapping("favorite")
-//    public ResponseEntity<Favorite> updateArticle(@RequestBody Favorite favorite) {
-//        favoriteService.updateFavorite(favorite);
-//        return new ResponseEntity<Favorite>(favorite, HttpStatus.OK);
-//    }
 
     @DeleteMapping("delete/{id}")
     public ResponseEntity<Void> deleteFavorite(@PathVariable("id") Integer id) {

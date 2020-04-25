@@ -29,27 +29,4 @@ public class RecipeCategoryController {
         return new ResponseEntity<List<RecipeCategory>>(list, HttpStatus.OK);
     }
 
-//    @PostMapping(path = "/add")
-//    public ResponseEntity<Void> addRecipeCategory(@RequestBody RecipeCategory recipeCategory, UriComponentsBuilder builder) {
-//        boolean flag = recipeCategoryService.addRecipeCategory(recipeCategory);
-//        if (flag == false) {
-//            return new ResponseEntity<Void>(HttpStatus.CONFLICT);
-//        }
-//        HttpHeaders headers = new HttpHeaders();
-//        headers.setLocation(builder.path("/add/{id}").buildAndExpand(recipeCategory.getId()).toUri());
-//        return new ResponseEntity<Void>(headers, HttpStatus.CREATED);
-//    }
-//
-//    @PutMapping("recipeCategory")
-//    public ResponseEntity<RecipeCategory> updateArticle(@RequestBody RecipeCategory recipeCategory) {
-//        recipeCategoryService.updateRecipeCategory(recipeCategory);
-//        return new ResponseEntity<RecipeCategory>(recipeCategory, HttpStatus.OK);
-//    }
-//
-//    @DeleteMapping("recipeCategory/{id}")
-//    public ResponseEntity<Void> deleteRecipeCategory(@PathVariable("id") Integer id) {
-//        recipeCategoryService.deleteRecipeCategory(id);
-//        return new ResponseEntity<Void>(HttpStatus.NO_CONTENT);
-//    }
-
 }
