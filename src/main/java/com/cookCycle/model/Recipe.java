@@ -1,7 +1,6 @@
 package com.cookCycle.model;
 
 import javax.persistence.*;
-import java.sql.Time;
 
 @Entity
 public class Recipe {
@@ -12,8 +11,8 @@ public class Recipe {
     private String title;
     private String instructions;
     private Integer serving;
-    private Time preparationMinutes;
-    private Time cookTime;
+    private Integer preparationMinutes;
+    private Integer cookTimeMinutes;
     private Integer categoryId;
     private String image;
     private String cuisine;
@@ -25,14 +24,14 @@ public class Recipe {
     protected Recipe() {
     }
 
-    public Recipe(int apiId, String apiSource, String title, String instructions, Integer serving, Time preparationMinutes, Time cookTime, Integer categoryId, String image, String cuisine, Byte isGlutenFree, Byte isVegetarian, Byte isVegan, Byte isDairyFree) {
+    public Recipe(int apiId, String apiSource, String title, String instructions, Integer serving, Integer preparationMinutes, Integer cookTimeMinutes, Integer categoryId, String image, String cuisine, Byte isGlutenFree, Byte isVegetarian, Byte isVegan, Byte isDairyFree) {
         this.apiId = apiId;
         this.apiSource = apiSource;
         this.title = title;
         this.instructions = instructions;
         this.serving = serving;
         this.preparationMinutes = preparationMinutes;
-        this.cookTime = cookTime;
+        this.cookTimeMinutes = cookTimeMinutes;
         this.categoryId = categoryId;
         this.image = image;
         this.cuisine = cuisine;
@@ -48,7 +47,7 @@ public class Recipe {
         return id;
     }
     //Only DB Should set the id
-    private void setId(int id) {
+    public void setId(int id) {
         this.id = id;
     }
 
@@ -104,22 +103,22 @@ public class Recipe {
 
     @Basic
     @Column(name = "preparationMinutes")
-    public Time getPreparationMinutes() {
+    public Integer getPreparationMinutes() {
         return preparationMinutes;
     }
 
-    public void setPreparationMinutes(Time preparationMinutes) {
+    public void setPreparationMinutes(Integer preparationMinutes) {
         this.preparationMinutes = preparationMinutes;
     }
 
     @Basic
-    @Column(name = "cookTime")
-    public Time getCookTime() {
-        return cookTime;
+    @Column(name = "cookTimeMinutes")
+    public Integer getCookTimeMinutes() {
+        return cookTimeMinutes;
     }
 
-    public void setCookTime(Time cookTime) {
-        this.cookTime = cookTime;
+    public void setCookTimeMinutes(Integer cookTime) {
+        this.cookTimeMinutes = cookTime;
     }
 
     @Basic
@@ -208,7 +207,7 @@ public class Recipe {
         if (serving != null ? !serving.equals(recipe.serving) : recipe.serving != null) return false;
         if (preparationMinutes != null ? !preparationMinutes.equals(recipe.preparationMinutes) : recipe.preparationMinutes != null)
             return false;
-        if (cookTime != null ? !cookTime.equals(recipe.cookTime) : recipe.cookTime != null) return false;
+        if (cookTimeMinutes != null ? !cookTimeMinutes.equals(recipe.cookTimeMinutes) : recipe.cookTimeMinutes != null) return false;
         if (categoryId != null ? !categoryId.equals(recipe.categoryId) : recipe.categoryId != null) return false;
         if (image != null ? !image.equals(recipe.image) : recipe.image != null) return false;
         if (cuisine != null ? !cuisine.equals(recipe.cuisine) : recipe.cuisine != null) return false;
@@ -231,7 +230,7 @@ public class Recipe {
         result = 31 * result + (instructions != null ? instructions.hashCode() : 0);
         result = 31 * result + (serving != null ? serving.hashCode() : 0);
         result = 31 * result + (preparationMinutes != null ? preparationMinutes.hashCode() : 0);
-        result = 31 * result + (cookTime != null ? cookTime.hashCode() : 0);
+        result = 31 * result + (cookTimeMinutes != null ? cookTimeMinutes.hashCode() : 0);
         result = 31 * result + (categoryId != null ? categoryId.hashCode() : 0);
         result = 31 * result + (image != null ? image.hashCode() : 0);
         result = 31 * result + (cuisine != null ? cuisine.hashCode() : 0);
@@ -252,7 +251,7 @@ public class Recipe {
                 ", instructions='" + instructions + '\'' +
                 ", serving=" + serving +
                 ", preparationMinutes=" + preparationMinutes +
-                ", cookTime=" + cookTime +
+                ", cookTime=" + cookTimeMinutes +
                 ", categoryId=" + categoryId +
                 ", image='" + image + '\'' +
                 ", cuisine='" + cuisine + '\'' +

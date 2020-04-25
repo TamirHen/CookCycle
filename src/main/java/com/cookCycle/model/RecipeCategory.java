@@ -21,7 +21,7 @@ public class RecipeCategory {
         return id;
     }
     //Only DB Should set the id
-    private void setId(int id) {
+    public void setId(int id) {
         this.id = id;
     }
 

@@ -1,21 +1,15 @@
-package com.cookCycle.userTests;
+package com.cookCycle.junitTests;
 
 import com.cookCycle.model.User;
 import com.cookCycle.repository.UserRepository;
-import com.cookCycle.service.IUserService;
 import com.cookCycle.service.UserService;
-import com.fasterxml.jackson.annotation.JsonTypeInfo;
 import org.junit.Assert;
-import org.junit.Before;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.extension.ExtendWith;
-import org.junit.runner.RunWith;
 import org.mockito.InjectMocks;
 import org.mockito.Mock;
 import org.mockito.Mockito;
-import org.mockito.MockitoAnnotations;
 import org.mockito.junit.jupiter.MockitoExtension;
-import org.springframework.test.context.junit4.SpringRunner;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -52,7 +46,7 @@ public class UserTests {
     }
 
     @Test
-    public void testThatWhenCallingGetByUsernameItsReturnUserObject() {
+    public void testThatWhenCallingGetByUsernameItReturnsUserObject() {
         final String username = "test@cookcycle.com";
         final User user = new User(username);
         Mockito.when(userMockRepository.findById(username)).thenReturn(Optional.of(user));

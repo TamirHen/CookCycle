@@ -1,4 +1,4 @@
-package com.cookCycle.favoriteTests;
+package com.cookCycle.junitTests;
 
 import com.cookCycle.model.Favorite;
 import com.cookCycle.repository.FavoriteRepository;
@@ -28,7 +28,8 @@ public class FavoriteTests {
     public void getAllFavoritesShouldReturnCorrectNumberOfFavorites() {
         final List<Favorite> favorites = new ArrayList<>();
         for (int i = 1; i <= 3; i++) {
-            favorites.add(new Favorite(i, "test@cookcycle.com", i + 1));
+            favorites.add(new Favorite("test@cookcycle.com", i + 1));
+            favorites.get(i-1).setId(i); // set id manually (because DB responsible for this).
         }
         Mockito.when(favoriteMockRepository.findAll()).thenReturn(favorites);
         final List<Favorite> expected = favoriteMockService.getAllFavorites();
@@ -39,30 +40,21 @@ public class FavoriteTests {
     @Test
     public void testThatWhenCallingGetFavoriteByIdItCallsFindByIdOnce() {
         final int id = 1;
-        final Favorite favorite = new Favorite(id);
+        final Favorite favorite = new Favorite("test@cookcycle.com", 3);
+        favorite.setId(id);
         Mockito.when(favoriteMockRepository.findById(id)).thenReturn(Optional.of(favorite));
         final Favorite expected = favoriteMockService.getFavoriteById(id);
         Mockito.verify(favoriteMockRepository, Mockito.times(1)).findById(id);
     }
 
     @Test
-    public void testThatWhenCallingGetByFavoritenameItsReturnFavoriteObject() {
-        final int id = "test@cookcycle.com";
-        final Favorite favorite = new Favorite(id);
+    public void testThatWhenCallingGetFavoriteByIdItReturnsFavoriteObject() {
+        final int id = 2;
+        final Favorite favorite = new Favorite("test@cookcycle.com", 1);
+        favorite.setId(id);
         Mockito.when(favoriteMockRepository.findById(id)).thenReturn(Optional.of(favorite));
-        final Favorite expected = favoriteMockService.getFavoriteByFavoritename(id);
+        final Favorite expected = favoriteMockService.getFavoriteById(id);
         Assert.assertNotNull(expected);
         Assert.assertEquals(favorite, expected);
-
     }
-
-    @Test
-    public void testThatWhenCreatingFavoriteItCallsSaveOnce() {
-        final Favorite favorite = new Favorite("test@cookcycle.com");
-        Mockito.when(favoriteMockRepository.save(Mockito.any(Favorite.class))).thenReturn(favorite);
-        favoriteMockService.addFavorite(favorite);
-
-        Mockito.verify(favoriteMockRepository, Mockito.times(1)).save(favorite);
-    }
-
 }

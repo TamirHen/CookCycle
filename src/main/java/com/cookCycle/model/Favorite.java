@@ -12,8 +12,7 @@ public class Favorite {
     private String username;
     private Integer recipeId;
 
-    public Favorite(int id, String username, Integer recipeId) {
-        this.id = id;
+    public Favorite(String username, Integer recipeId) {
         this. username = username;
         this.recipeId = recipeId;
     }
