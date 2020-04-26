@@ -6,5 +6,6 @@ import java.util.List;
 
 public interface IRecipeService {
     List<Recipe> getAllRecipes();
-    Recipe getRecipeById(Long recipeId);
+    Recipe getRecipeById(Long recipeId) throws Throwable;
+    Recipe addRecipe(Recipe recipe);
 }

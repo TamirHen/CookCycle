@@ -37,7 +37,7 @@ public class UserTests {
     }
 
     @Test
-    public void testThatWhenCallingGetByUsernameItCallsFindByIdOnce() {
+    public void testThatWhenCallingGetByUsernameItCallsFindByIdOnce() throws Throwable {
         final String username = "test@cookcycle.com";
         final User user = new User(username);
         Mockito.when(userMockRepository.findById(username)).thenReturn(Optional.of(user));
@@ -46,7 +46,7 @@ public class UserTests {
     }
 
     @Test
-    public void testThatWhenCallingGetByUsernameItReturnsUserObject() {
+    public void testThatWhenCallingGetByUsernameItReturnsUserObject() throws Throwable {
         final String username = "test@cookcycle.com";
         final User user = new User(username);
         Mockito.when(userMockRepository.findById(username)).thenReturn(Optional.of(user));

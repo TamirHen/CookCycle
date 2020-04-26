@@ -19,7 +19,7 @@ public class FavoriteController {
     private IFavoriteService favoriteService;
 
     @GetMapping(path = "/getbyid/{id}")
-    public ResponseEntity<Favorite> getFavoriteById(@PathVariable("id") Long id) {
+    public ResponseEntity<Favorite> getFavoriteById(@PathVariable("id") Long id) throws Throwable {
         Favorite favorite = favoriteService.getFavoriteById(id);
         return new ResponseEntity<Favorite>(favorite, HttpStatus.OK);
     }
@@ -31,18 +31,18 @@ public class FavoriteController {
     }
 
     @PostMapping(path = "/add")
-    public ResponseEntity<Void> addFavorite(@RequestBody Favorite favorite, UriComponentsBuilder builder) {
-        boolean flag = favoriteService.addFavorite(favorite);
-        if (flag == false) {
-            return new ResponseEntity<Void>(HttpStatus.CONFLICT);
-        }
-        HttpHeaders headers = new HttpHeaders();
-        headers.setLocation(builder.path("/add/{id}").buildAndExpand(favorite.getId()).toUri());
-        return new ResponseEntity<Void>(headers, HttpStatus.CREATED);
+    public ResponseEntity<Favorite> addFavorite(@RequestBody Favorite favorite, UriComponentsBuilder builder) {
+        Favorite dbFavorite = favoriteService.addFavorite(favorite);
+//        if (flag == false) {
+//            return new ResponseEntity<Void>(HttpStatus.CONFLICT);
+//        }
+//        HttpHeaders headers = new HttpHeaders();
+//        headers.setLocation(builder.path("/add/{id}").buildAndExpand(favorite.getId()).toUri());
+        return new ResponseEntity<Favorite>(dbFavorite, HttpStatus.CREATED);
     }
 
     @DeleteMapping("delete/{id}")
-    public ResponseEntity<Void> deleteFavorite(@PathVariable("id") Long id) {
+    public ResponseEntity<Void> deleteFavorite(@PathVariable("id") Long id) throws Throwable {
         favoriteService.deleteFavorite(id);
         return new ResponseEntity<Void>(HttpStatus.NO_CONTENT);
     }

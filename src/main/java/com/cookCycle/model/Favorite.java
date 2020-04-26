@@ -5,11 +5,12 @@ import lombok.Data;
 import javax.persistence.*;
 
 @Entity
+@Table(name="Favorite")
 @Data
 public class Favorite {
 
     @Id
-    @GeneratedValue
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
     private String username;
     private Long recipeId;

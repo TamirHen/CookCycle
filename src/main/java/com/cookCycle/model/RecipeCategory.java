@@ -6,10 +6,11 @@ import javax.persistence.*;
 
 @Data
 @Entity
+@Table(name="RecipeCategory")
 public class RecipeCategory {
 
     @Id
-    @GeneratedValue
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     private int id;
     private String name;
 

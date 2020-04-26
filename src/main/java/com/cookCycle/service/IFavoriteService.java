@@ -6,7 +6,7 @@ import java.util.List;
 
 public interface IFavoriteService {
     List<Favorite> getAllFavorites();
-    Favorite getFavoriteById(Long favoriteId);
-    boolean addFavorite(Favorite favorite);
-    void deleteFavorite(Long favoriteId);
+    Favorite getFavoriteById(Long favoriteId) throws Throwable;
+    Favorite addFavorite(Favorite favorite);
+    void deleteFavorite(Long favoriteId) throws Throwable;
 }

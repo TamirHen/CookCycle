@@ -4,11 +4,14 @@ import com.cookCycle.model.Favorite;
 import com.cookCycle.model.User;
 import com.cookCycle.repository.FavoriteRepository;
 import com.cookCycle.repository.UserRepository;
+import com.cookCycle.service.Handler.UserAlreadyExist;
+import com.cookCycle.service.Handler.UserNotFoundException;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.function.Supplier;
 
 @Service
 public class UserService implements IUserService {
@@ -25,20 +28,23 @@ public class UserService implements IUserService {
     }
 
     @Override
-    public User getUserByUsername(String username) {
-        User obj = userRepository.findById(username).get();
+    public User getUserByUsername(String username) throws Throwable {
+        User obj = userRepository.findById(username).orElseThrow(new Supplier<Throwable>() {
+            @Override
+            public Throwable get() {
+                return new UserNotFoundException(username);
+            }
+        });
         return obj;
     }
 
     @Override
-    public boolean addUser(User user) {
+    public User addUser(User user) {
         List<User> list = (List<User>) userRepository.findAll();
-        if (list == null) return false;
-        for (User r:list) {
-            if (user.getUsername() == r.getUsername()) return false;
+        for (User u:list) {
+            if (user.getUsername().equals(u.getUsername())) throw new UserAlreadyExist(u.getUsername());
         }
-            userRepository.save(user);
-            return true;
+            return userRepository.save(user);
     }
 
     @Override

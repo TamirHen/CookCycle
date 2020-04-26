@@ -20,7 +20,7 @@ public class UserController {
     private IUserService userService;
 
     @PostMapping(path = "/getbyusername")
-    public ResponseEntity<User> getUserByUsername(@RequestBody User userRequest) {
+    public ResponseEntity<User> getUserByUsername(@RequestBody User userRequest) throws Throwable {
         User user = userService.getUserByUsername(userRequest.getUsername());
         return new ResponseEntity<User>(user, HttpStatus.OK);
     }
@@ -32,23 +32,23 @@ public class UserController {
     }
 
     @PostMapping(path = "/add")
-    public ResponseEntity<Void> addUser(@RequestBody User user, UriComponentsBuilder builder) {
-        boolean flag = userService.addUser(user);
-        if (flag == false) {
-            return new ResponseEntity<Void>(HttpStatus.CONFLICT);
-        }
-        HttpHeaders headers = new HttpHeaders();
-        headers.setLocation(builder.path("/add/{username}").buildAndExpand(user.getUsername()).toUri());
-        return new ResponseEntity<Void>(headers, HttpStatus.CREATED);
+    public ResponseEntity<User> addUser(@RequestBody User user, UriComponentsBuilder builder) {
+        User dbUser = userService.addUser(user);
+//        if (flag == false) {
+//            return new ResponseEntity<Void>(HttpStatus.CONFLICT);
+//        }
+//        HttpHeaders headers = new HttpHeaders();
+//        headers.setLocation(builder.path("/add/{username}").buildAndExpand(user.getUsername()).toUri());
+        return new ResponseEntity<User>(dbUser, HttpStatus.CREATED);
     }
 
-    @PostMapping(path = "/getallfavoritesbyusername")
+    @PostMapping(path = "/getallfavoritesbyusername") // post request because username is an email so it must be sent within the body of the request.
     public ResponseEntity<List<Favorite>> getAllFavoritesByUsername(@RequestBody User userRequest) {
         List<Favorite> favorites = userService.getAllFavoritesByUsername(userRequest.getUsername());
         return new ResponseEntity<List<Favorite>>(favorites, HttpStatus.OK);
     }
 
-    @PutMapping("user")
+    @PutMapping("/update")
     public ResponseEntity<User> updateArticle(@RequestBody User user) {
         userService.updateUser(user);
         return new ResponseEntity<User>(user, HttpStatus.OK);

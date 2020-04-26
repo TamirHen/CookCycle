@@ -7,8 +7,8 @@ import java.util.List;
 
 public interface IUserService {
     List<User> getAllUsers();
-    User getUserByUsername(String username);
-    boolean addUser(User user);
+    User getUserByUsername(String username) throws Throwable;
+    User addUser(User user);
     void updateUser(User user);
     List<Favorite> getAllFavoritesByUsername(String username);
 }
