@@ -6,5 +6,5 @@ import java.util.List;
 
 public interface IIngredientService {
     List<Ingredient> getAllIngredients();
-    Ingredient getIngredientById(int ingredientId);
+    Ingredient getIngredientById(Long ingredientId);
 }

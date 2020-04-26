@@ -7,6 +7,6 @@ import org.springframework.data.repository.CrudRepository;
 import java.util.List;
 import java.util.Optional;
 
-public interface IngredientRepository extends CrudRepository<Ingredient, Integer>{
+public interface IngredientRepository extends CrudRepository<Ingredient, Long>{
 
 }

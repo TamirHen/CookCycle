@@ -8,10 +8,8 @@ import com.cookCycle.repository.RecipeRepository;
 import com.cookCycle.repository.UserRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
-
 import java.util.ArrayList;
 import java.util.List;
-import java.util.Map;
 import java.util.stream.Collectors;
 
 @Service
@@ -31,7 +29,7 @@ public class FavoriteService implements IFavoriteService {
     }
 
     @Override
-    public Favorite getFavoriteById(int favoriteId) {
+    public Favorite getFavoriteById(Long favoriteId) {
         Favorite obj = favoriteRepository.findById(favoriteId).get();
         return obj;
     }
@@ -60,7 +58,7 @@ public class FavoriteService implements IFavoriteService {
     }
 
     @Override
-    public void deleteFavorite(int favoriteId) {
+    public void deleteFavorite(Long favoriteId) {
         favoriteRepository.delete(getFavoriteById(favoriteId));
     }
 }

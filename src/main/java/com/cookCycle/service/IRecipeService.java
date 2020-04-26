@@ -6,5 +6,5 @@ import java.util.List;
 
 public interface IRecipeService {
     List<Recipe> getAllRecipes();
-    Recipe getRecipeById(int recipeId);
+    Recipe getRecipeById(Long recipeId);
 }

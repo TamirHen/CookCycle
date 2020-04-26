@@ -21,7 +21,7 @@ public class RecipeCategoryService implements IRecipeCategoryService {
     }
 
     @Override
-    public RecipeCategory getRecipeCategoryById(int recipeCategoryId) {
+    public RecipeCategory getRecipeCategoryById(Long recipeCategoryId) {
         RecipeCategory obj = recipeCategoryRepository.findById(recipeCategoryId).get();
         return obj;
     }

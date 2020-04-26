@@ -7,6 +7,6 @@ import org.springframework.data.repository.CrudRepository;
 
 import java.util.List;
 
-public interface RecipeCategoryRepository extends CrudRepository<RecipeCategory, Integer>{
+public interface RecipeCategoryRepository extends CrudRepository<RecipeCategory, Long>{
 
 }

@@ -20,7 +20,7 @@ public class IngredientsInRecipesController {
     private IIngredientsInRecipesService ingredientsInRecipesService;
 
     @GetMapping(path = "/getbyid/{id}")
-    public ResponseEntity<IngredientsInRecipes> getIngredientsInRecipesById(@PathVariable("id") Integer id) {
+    public ResponseEntity<IngredientsInRecipes> getIngredientsInRecipesById(@PathVariable("id") Long id) {
         IngredientsInRecipes ingredientsInRecipes = ingredientsInRecipesService.getIngredientsInRecipesById(id);
         return new ResponseEntity<IngredientsInRecipes>(ingredientsInRecipes, HttpStatus.OK);
     }

@@ -21,7 +21,7 @@ public class IngredientService implements IIngredientService {
     }
 
     @Override
-    public Ingredient getIngredientById(int ingredientId) {
+    public Ingredient getIngredientById(Long ingredientId) {
         Ingredient obj = ingredientRepository.findById(ingredientId).get();
         return obj;
     }

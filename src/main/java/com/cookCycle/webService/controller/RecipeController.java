@@ -20,7 +20,7 @@ public class RecipeController {
     private IRecipeService recipeService;
 
     @GetMapping(path = "/getbyid/{id}")
-    public ResponseEntity<Recipe> getRecipeById(@PathVariable("id") Integer id) {
+    public ResponseEntity<Recipe> getRecipeById(@PathVariable("id") Long id) {
         Recipe recipe = recipeService.getRecipeById(id);
         return new ResponseEntity<Recipe>(recipe, HttpStatus.OK);
     }

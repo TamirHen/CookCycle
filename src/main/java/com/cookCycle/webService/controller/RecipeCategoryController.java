@@ -18,7 +18,7 @@ public class RecipeCategoryController {
     private IRecipeCategoryService recipeCategoryService;
 
     @GetMapping(path = "/getbyid/{id}")
-    public ResponseEntity<RecipeCategory> getRecipeCategoryById(@PathVariable("id") Integer id) {
+    public ResponseEntity<RecipeCategory> getRecipeCategoryById(@PathVariable("id") Long id) {
         RecipeCategory recipeCategory = recipeCategoryService.getRecipeCategoryById(id);
         return new ResponseEntity<RecipeCategory>(recipeCategory, HttpStatus.OK);
     }

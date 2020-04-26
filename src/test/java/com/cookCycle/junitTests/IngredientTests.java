@@ -28,19 +28,17 @@ public class IngredientTests {
     public void getAllIngredientsShouldReturnCorrectNumberOfIngredients() {
         final List<Ingredient> ingredients = new ArrayList<>();
         for (int i = 1; i <= 3; i++) {
-            byte vFalse = 0;
-            byte vTrue = 1;
             ingredients.add(new Ingredient(
-                    200 + i,
+                    new Long(200 + i),
                     "butter",
-                    1,
+                    new Long(1),
                     "Some image url",
-                    new Byte(vTrue),
-                    new Byte(vTrue),
-                    new Byte(vFalse),
-                    new Byte(vFalse)
+                    true,
+                    true,
+                    false,
+                    false
             ));
-            ingredients.get(i-1).setId(i); // set id manually (because DB responsible for this).
+            ingredients.get(i-1).setId(new Long(i)); // set id manually (because DB responsible for this).
         }
         Mockito.when(ingredientMockRepository.findAll()).thenReturn(ingredients);
         final List<Ingredient> expected = ingredientMockService.getAllIngredients();
@@ -50,18 +48,16 @@ public class IngredientTests {
 
     @Test
     public void testThatWhenCallingGetIngredientByIdItCallsFindByIdOnce() {
-        final int id = 1;
-        byte vFalse = 0;
-        byte vTrue = 1;
+        final Long id = new Long(1);
         final Ingredient ingredient = new Ingredient(
-                200,
+                new Long(200),
                 "butter",
-                1,
+                new Long(1),
                 "Some image url",
-                new Byte(vTrue),
-                new Byte(vTrue),
-                new Byte(vFalse),
-                new Byte(vFalse)
+                true,
+                true,
+                false,
+                false
         );
         ingredient.setId(id);
         Mockito.when(ingredientMockRepository.findById(id)).thenReturn(Optional.of(ingredient));
@@ -71,18 +67,16 @@ public class IngredientTests {
 
     @Test
     public void testThatWhenCallingGetIngredientByIdItReturnsIngredientObject() {
-        final int id = 2;
-        byte vFalse = 0;
-        byte vTrue = 1;
+        final Long id = new Long(2);
         final Ingredient ingredient = new Ingredient(
-                200,
+                new Long(200),
                 "butter",
-                1,
+                new Long(1),
                 "Some image url",
-                new Byte(vTrue),
-                new Byte(vTrue),
-                new Byte(vFalse),
-                new Byte(vFalse)
+                true,
+                true,
+                false,
+                false
         );
         ingredient.setId(id);
         Mockito.when(ingredientMockRepository.findById(id)).thenReturn(Optional.of(ingredient));

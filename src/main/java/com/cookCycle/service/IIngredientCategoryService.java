@@ -7,5 +7,5 @@ import java.util.List;
 
 public interface IIngredientCategoryService {
     List<IngredientCategory> getAllIngredientCategories();
-    IngredientCategory getIngredientCategoryById(int ingredientCategoryId);
+    IngredientCategory getIngredientCategoryById(Long ingredientCategoryId);
 }

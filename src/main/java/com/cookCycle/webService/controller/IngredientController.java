@@ -20,7 +20,7 @@ public class IngredientController {
     private IIngredientService ingredientService;
 
     @GetMapping(path = "/getbyid/{id}")
-    public ResponseEntity<Ingredient> getIngredientById(@PathVariable("id") Integer id) {
+    public ResponseEntity<Ingredient> getIngredientById(@PathVariable("id") Long id) {
         Ingredient ingredient = ingredientService.getIngredientById(id);
         return new ResponseEntity<Ingredient>(ingredient, HttpStatus.OK);
     }

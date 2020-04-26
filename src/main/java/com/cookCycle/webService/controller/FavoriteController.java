@@ -19,7 +19,7 @@ public class FavoriteController {
     private IFavoriteService favoriteService;
 
     @GetMapping(path = "/getbyid/{id}")
-    public ResponseEntity<Favorite> getFavoriteById(@PathVariable("id") Integer id) {
+    public ResponseEntity<Favorite> getFavoriteById(@PathVariable("id") Long id) {
         Favorite favorite = favoriteService.getFavoriteById(id);
         return new ResponseEntity<Favorite>(favorite, HttpStatus.OK);
     }
@@ -42,7 +42,7 @@ public class FavoriteController {
     }
 
     @DeleteMapping("delete/{id}")
-    public ResponseEntity<Void> deleteFavorite(@PathVariable("id") Integer id) {
+    public ResponseEntity<Void> deleteFavorite(@PathVariable("id") Long id) {
         favoriteService.deleteFavorite(id);
         return new ResponseEntity<Void>(HttpStatus.NO_CONTENT);
     }
