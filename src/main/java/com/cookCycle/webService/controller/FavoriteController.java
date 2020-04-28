@@ -33,11 +33,6 @@ public class FavoriteController {
     @PostMapping(path = "/add")
     public ResponseEntity<Favorite> addFavorite(@RequestBody Favorite favorite, UriComponentsBuilder builder) {
         Favorite dbFavorite = favoriteService.addFavorite(favorite);
-//        if (flag == false) {
-//            return new ResponseEntity<Void>(HttpStatus.CONFLICT);
-//        }
-//        HttpHeaders headers = new HttpHeaders();
-//        headers.setLocation(builder.path("/add/{id}").buildAndExpand(favorite.getId()).toUri());
         return new ResponseEntity<Favorite>(dbFavorite, HttpStatus.CREATED);
     }
 

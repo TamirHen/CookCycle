@@ -3,6 +3,7 @@ package com.cookCycle.model;
 import lombok.Data;
 
 import javax.persistence.*;
+import java.util.List;
 
 @Data
 @Entity
@@ -16,6 +17,8 @@ public class Recipe {
     private String apiSource;
     private String title;
     private String instructions;
+    @OneToMany(mappedBy = "recipe",fetch = FetchType.EAGER)
+    List<IngredientsInRecipes> ingredientsInRecipe;
     private Integer serving;
     private Integer preparationMinutes;
     private Integer cookTimeMinutes;
@@ -30,11 +33,12 @@ public class Recipe {
     protected Recipe() {
     }
 
-    public Recipe(Long apiId, String apiSource, String title, String instructions, Integer serving, Integer preparationMinutes, Integer cookTimeMinutes, Long categoryId, String image, String cuisine, Boolean isGlutenFree, Boolean isVegetarian, Boolean isVegan, Boolean isDairyFree) {
+    public Recipe(Long apiId, String apiSource, String title, String instructions, List<IngredientsInRecipes> ingredientsInRecipe, Integer serving, Integer preparationMinutes, Integer cookTimeMinutes, Long categoryId, String image, String cuisine, Boolean isGlutenFree, Boolean isVegetarian, Boolean isVegan, Boolean isDairyFree) {
         this.apiId = apiId;
         this.apiSource = apiSource;
         this.title = title;
         this.instructions = instructions;
+        this.ingredientsInRecipe = ingredientsInRecipe;
         this.serving = serving;
         this.preparationMinutes = preparationMinutes;
         this.cookTimeMinutes = cookTimeMinutes;
@@ -45,5 +49,27 @@ public class Recipe {
         this.isVegetarian = isVegetarian;
         this.isVegan = isVegan;
         this.isDairyFree = isDairyFree;
+    }
+
+    @Override
+    public String toString() { // Overriding toString to prevent infinite loop with ingredientInRecipe.Recipe
+        return "Recipe{" +
+                "id=" + id +
+                ", apiId=" + apiId +
+                ", apiSource='" + apiSource + '\'' +
+                ", title='" + title + '\'' +
+                ", instructions='" + instructions + '\'' +
+                ", ingredientsInRecipe size=" + ingredientsInRecipe.size() +
+                ", serving=" + serving +
+                ", preparationMinutes=" + preparationMinutes +
+                ", cookTimeMinutes=" + cookTimeMinutes +
+                ", categoryId=" + categoryId +
+                ", image='" + image + '\'' +
+                ", cuisine='" + cuisine + '\'' +
+                ", isGlutenFree=" + isGlutenFree +
+                ", isVegetarian=" + isVegetarian +
+                ", isVegan=" + isVegan +
+                ", isDairyFree=" + isDairyFree +
+                '}';
     }
 }

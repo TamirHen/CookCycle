@@ -12,7 +12,9 @@ public class IngredientsInRecipes {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
-    private Long recipeId;
+    @ManyToOne
+    @JoinColumn(name = "recipeId", nullable = false)
+    private Recipe recipe;
     private Long ingredientId;
     private Double amount;
     private String unit;
@@ -21,11 +23,14 @@ public class IngredientsInRecipes {
     protected IngredientsInRecipes() {
     }
 
-    public IngredientsInRecipes(Long recipeId, Long ingredientId, Double amount, String unit, String unitAndAmountString) {
-        this.recipeId = recipeId;
+    public IngredientsInRecipes(Long ingredientId, Double amount, String unit, String unitAndAmountString) {
         this.ingredientId = ingredientId;
         this.amount = amount;
         this.unit = unit;
         this.unitAndAmountString = unitAndAmountString;
+    }
+
+    public Long getRecipe() { // returning only recipeId to prevent infinite loop with recipe.ingredientsInRecipe
+        return recipe.getId();
     }
 }

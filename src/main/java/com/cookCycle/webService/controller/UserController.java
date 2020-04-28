@@ -34,11 +34,6 @@ public class UserController {
     @PostMapping(path = "/add")
     public ResponseEntity<User> addUser(@RequestBody User user, UriComponentsBuilder builder) {
         User dbUser = userService.addUser(user);
-//        if (flag == false) {
-//            return new ResponseEntity<Void>(HttpStatus.CONFLICT);
-//        }
-//        HttpHeaders headers = new HttpHeaders();
-//        headers.setLocation(builder.path("/add/{username}").buildAndExpand(user.getUsername()).toUri());
         return new ResponseEntity<User>(dbUser, HttpStatus.CREATED);
     }
 

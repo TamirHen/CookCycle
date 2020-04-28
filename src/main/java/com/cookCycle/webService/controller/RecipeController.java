@@ -31,13 +31,8 @@ public class RecipeController {
     }
 
     @PostMapping(path = "/add")
-    public ResponseEntity<Recipe> addUser(@RequestBody Recipe recipe, UriComponentsBuilder builder) {
+    public ResponseEntity<Recipe> addUser(@RequestBody Recipe recipe, UriComponentsBuilder builder) throws Throwable {
         Recipe dbRecipe = recipeService.addRecipe(recipe);
-//        if (!flag) {
-//            return new ResponseEntity<Void>(HttpStatus.CONFLICT);
-//        }
-//        HttpHeaders headers = new HttpHeaders();
-//        headers.setLocation(builder.path("/add/{id}").buildAndExpand(recipe.getId()).toUri());
         return new ResponseEntity<Recipe>(dbRecipe, HttpStatus.CREATED);
     }
 

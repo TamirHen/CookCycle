@@ -1,10 +1,17 @@
 package com.cookCycle.service;
 
+import com.cookCycle.model.Ingredient;
+import com.cookCycle.model.IngredientsInRecipes;
 import com.cookCycle.model.Recipe;
+import com.cookCycle.repository.IngredientRepository;
+import com.cookCycle.repository.IngredientsInRecipesRepository;
 import com.cookCycle.repository.RecipeRepository;
+import com.cookCycle.service.Handler.IngredientAlreadyExist;
+import com.cookCycle.service.Handler.IngredientNotFoundException;
 import com.cookCycle.service.Handler.RecipeAlreadyExist;
 import com.cookCycle.service.Handler.RecipeNotFoundException;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.boot.web.servlet.server.Session;
 import org.springframework.stereotype.Service;
 
 import java.util.ArrayList;
@@ -15,6 +22,10 @@ import java.util.function.Supplier;
 public class RecipeService implements IRecipeService {
     @Autowired
     private RecipeRepository recipeRepository;
+    @Autowired
+    private IngredientRepository ingredientRepository;
+    @Autowired
+    IngredientsInRecipesRepository ingredientsInRecipesRepository;
 
     @Override
     public List<Recipe> getAllRecipes() {
@@ -35,11 +46,28 @@ public class RecipeService implements IRecipeService {
     }
 
     @Override
-    public Recipe addRecipe(Recipe recipe) {
+    public Recipe addRecipe(Recipe recipe) throws Throwable {
         List<Recipe> list = (List<Recipe>) recipeRepository.findAll();
+        List<Ingredient> ingredients = (List<Ingredient>) ingredientRepository.findAll();
+
         for (Recipe r:list) {
             if (recipe.getApiId().equals(r.getApiId())) throw new RecipeAlreadyExist(r.getId());
         }
-        return recipeRepository.save(recipe);
+        for (IngredientsInRecipes iir:recipe.getIngredientsInRecipe()) { // check that all ingredients in the DB.
+                ingredientRepository.findById(iir.getIngredientId()).orElseThrow(new Supplier<Throwable>() {
+                    @Override
+                    public Throwable get() {
+                        throw new IngredientNotFoundException(iir.getIngredientId());
+                    }
+                });
+        }
+
+        recipeRepository.save(recipe);
+        for (IngredientsInRecipes iir:recipe.getIngredientsInRecipe()) { // save all ingredientsInRecipe to DB
+            iir.setRecipe(recipe);
+            ingredientsInRecipesRepository.save(iir);
+        }
+
+        return recipe;
     }
 }

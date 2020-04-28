@@ -35,11 +35,6 @@ public class IngredientController {
     @PostMapping(path = "/add")
     public ResponseEntity<Ingredient> addIngredient(@RequestBody Ingredient ingredient, UriComponentsBuilder builder) throws Throwable {
         Ingredient dbIngredient = ingredientService.addIngredient(ingredient);
-//        if (!flag) {
-//            return new ResponseEntity<Void>(HttpStatus.CONFLICT);
-//        }
-//        HttpHeaders headers = new HttpHeaders();
-//        headers.setLocation(builder.path("/add/{id}").buildAndExpand(ingredient.getId()).toUri());
         return new ResponseEntity<Ingredient>(dbIngredient, HttpStatus.CREATED);
     }
 }

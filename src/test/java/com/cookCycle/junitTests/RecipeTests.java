@@ -1,5 +1,6 @@
 package com.cookCycle.junitTests;
 
+import com.cookCycle.model.IngredientsInRecipes;
 import com.cookCycle.model.Recipe;
 import com.cookCycle.repository.RecipeRepository;
 import com.cookCycle.service.RecipeService;
@@ -27,6 +28,8 @@ public class RecipeTests {
     @Test
     public void getAllRecipesShouldReturnCorrectNumberOfRecipes() {
         final List<Recipe> recipes = new ArrayList<>();
+        final List<IngredientsInRecipes> ingredientsInRecipe = new ArrayList<>();
+        ingredientsInRecipe.add(new IngredientsInRecipes(new Long(1), new Double(1), "cup", "example"));
         for (int i = 1; i <= 3; i++) {
 
             recipes.add(new Recipe(
@@ -34,6 +37,7 @@ public class RecipeTests {
                     "source for test",
                     "Spaghetti Bolognese",
                     "Some instructions for spaghetti bolognese",
+                    ingredientsInRecipe,
                     4,
                     10,
                     10,
@@ -56,11 +60,14 @@ public class RecipeTests {
     @Test
     public void testThatWhenCallingGetRecipeByIdItCallsFindByIdOnce() throws Throwable {
         final Long id = new Long(1);
+        final List<IngredientsInRecipes> ingredientsInRecipe = new ArrayList<>();
+        ingredientsInRecipe.add(new IngredientsInRecipes(new Long(1), new Double(1), "cup", "example"));
         final Recipe recipe = new Recipe(
                 new Long(100),
                 "source for test",
                 "Spaghetti Bolognese",
                 "Some instructions for spaghetti bolognese",
+                ingredientsInRecipe,
                 4,
                 10,
                 10,
@@ -81,11 +88,14 @@ public class RecipeTests {
     @Test
     public void testThatWhenCallingGetRecipeByIdItReturnsRecipeObject() throws Throwable {
         final Long id = new Long(2);
+        final List<IngredientsInRecipes> ingredientsInRecipe = new ArrayList<>();
+        ingredientsInRecipe.add(new IngredientsInRecipes(new Long(1), new Double(1), "cup", "example"));
         final Recipe recipe = new Recipe(
                 new Long(100),
                 "source for test",
                 "Spaghetti Bolognese",
                 "Some instructions for spaghetti bolognese",
+                ingredientsInRecipe,
                 4,
                 10,
                 10,
