@@ -44,6 +44,14 @@ public class FavoriteService implements IFavoriteService {
         return obj;
     }
 
+    /*
+    * Validations before favorite creation:
+    *   Checks that userRepository.findAll() doesn't return null.
+    *   Checks if the user exists.
+    *   Checks that recipeRepository.findAll() doesn't return null.
+    *   Checks if the recipe exists.
+    *   Checks if the user already have this favorite.
+    */
     @Override
     public Favorite addFavorite(Favorite favorite) {
         List<Favorite> favorites = (List<Favorite>) favoriteRepository.findAll();
@@ -51,15 +59,15 @@ public class FavoriteService implements IFavoriteService {
         List<Recipe> recipes = (List<Recipe>) recipeRepository.findAll();
 
         if (users == null) throw new NullPointerException("No users in the DB");
-        if (!(users.stream().map(User::getUsername).collect(Collectors.toList()).contains(favorite.getUser()))) // checks if the user exists.
+        if (!(users.stream().map(User::getUsername).collect(Collectors.toList()).contains(favorite.getUser())))
             throw new UserNotFoundException(favorite.getUser());
 
         if (recipes == null) throw new NullPointerException("No recipes in the DB");
-        if (!(recipes.stream().map(Recipe::getId).collect(Collectors.toList()).contains(favorite.getRecipeId()))) // checks if the recipe exists.
+        if (!(recipes.stream().map(Recipe::getId).collect(Collectors.toList()).contains(favorite.getRecipeId())))
             throw new RecipeNotFoundException(favorite.getRecipeId());
 
         for (Favorite f:favorites) {
-            if (favorite.getUser().equals(f.getUser()) && favorite.getRecipeId().equals(f.getRecipeId())) // checks if the user already have this favorite.
+            if (favorite.getUser().equals(f.getUser()) && favorite.getRecipeId().equals(f.getRecipeId()))
                 throw new FavoriteAlreadyExist(f.getId());
         }
             return favoriteRepository.save(favorite);

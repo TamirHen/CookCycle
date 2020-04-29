@@ -7,7 +7,7 @@ import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.bind.annotation.ResponseStatus;
 /*
 * When creating user, favorites data member must be null.
-* New favorite should be added only from /favorite/add.
+* New favorite must be added only from /favorite/add.
 */
 public class FavoritesNotNullException extends RuntimeException {
     @ControllerAdvice

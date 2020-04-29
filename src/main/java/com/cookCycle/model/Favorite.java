@@ -25,7 +25,10 @@ public class Favorite {
         this.recipeId = recipeId;
     }
 
-    public String getUser() { // returning only username to prevent infinite loop with user.favorites
+    /*
+    * Returning only username to prevent infinite loop with user.favorites.
+    */
+    public String getUser() {
         return user.getUsername();
     }
 }

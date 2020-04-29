@@ -30,7 +30,8 @@ public class FavoriteTests {
         final List<Favorite> favorites = new ArrayList<>();
         for (int i = 1; i <= 3; i++) {
             favorites.add(new Favorite(new User("test@cookcycle.com"), new Long(i + 1)));
-            favorites.get(i-1).setId(new Long(i)); // set id manually (because DB responsible for this).
+            /* Set id manually (because DB responsible for this). */
+            favorites.get(i-1).setId(new Long(i));
         }
         Mockito.when(favoriteMockRepository.findAll()).thenReturn(favorites);
         final List<Favorite> expected = favoriteMockService.getAllFavorites();
@@ -42,6 +43,7 @@ public class FavoriteTests {
     public void testThatWhenCallingGetFavoriteByIdItCallsFindByIdOnce() throws Throwable {
         final Long id = new Long(1);
         final Favorite favorite = new Favorite(new User("test@cookcycle.com"), new Long(3));
+        /* Set id manually (because DB responsible for this). */
         favorite.setId(id);
         Mockito.when(favoriteMockRepository.findById(id)).thenReturn(Optional.of(favorite));
         final Favorite expected = favoriteMockService.getFavoriteById(id);
@@ -52,6 +54,7 @@ public class FavoriteTests {
     public void testThatWhenCallingGetFavoriteByIdItReturnsFavoriteObject() throws Throwable {
         final Long id = new Long(2);
         final Favorite favorite = new Favorite(new User("test@cookcycle.com"), new Long(1));
+        /* Set id manually (because DB responsible for this). */
         favorite.setId(id);
         Mockito.when(favoriteMockRepository.findById(id)).thenReturn(Optional.of(favorite));
         final Favorite expected = favoriteMockService.getFavoriteById(id);

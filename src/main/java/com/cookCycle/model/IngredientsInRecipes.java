@@ -32,7 +32,10 @@ public class IngredientsInRecipes {
         this.unitAndAmountString = unitAndAmountString;
     }
 
-    public Long getRecipe() { // returning only recipeId to prevent infinite loop with recipe.ingredientsInRecipe
+    /*
+    * Returning only recipeId to prevent infinite loop with recipe.ingredientsInRecipe.
+    */
+    public Long getRecipe() {
         return recipe.getId();
     }
 }

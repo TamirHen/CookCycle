@@ -47,6 +47,14 @@ public class RecipeService implements IRecipeService {
         return obj;
     }
 
+    /*
+     * Validations before recipe creation:
+     *   Checks that there is no recipe in the DB with the same apiId.
+     *   Check that recipe.getCategoryId exists.
+     *   Check that vegan recipe is also vegetarian and dairy free.
+     *   Check that all the ingredients in the DB.
+     *
+     */
     @Override
     public Recipe addRecipe(Recipe recipe) throws Throwable {
         List<Recipe> list = (List<Recipe>) recipeRepository.findAll();
@@ -56,14 +64,14 @@ public class RecipeService implements IRecipeService {
         for (Recipe r:list) {
             if (recipe.getApiId().equals(r.getApiId())) throw new RecipeAlreadyExist(r.getId());
         }
-        if (!(recipeCategories.stream().map(RecipeCategory::getId).collect(Collectors.toList()).contains(recipe.getCategoryId()))) // check that recipe.getCategoryId exists.
+        if (!(recipeCategories.stream().map(RecipeCategory::getId).collect(Collectors.toList()).contains(recipe.getCategoryId())))
             throw new RecipeCategoryNotFoundException(recipe.getCategoryId());
 
-        if (recipe.getIsVegan() == true) { // check that vegan recipe is also vegetarian and dairy free.
+        if (recipe.getIsVegan() == true) {
             if (recipe.getIsDairyFree() == false || recipe.getIsVegetarian() == false)
                 throw new RecipeVeganException(recipe);
         }
-        for (IngredientsInRecipes iir:recipe.getIngredientsInRecipe()) { // check that all ingredients in the DB.
+        for (IngredientsInRecipes iir:recipe.getIngredientsInRecipe()) {
                 ingredientRepository.findById(iir.getIngredientId()).orElseThrow(new Supplier<Throwable>() {
                     @Override
                     public Throwable get() {
@@ -73,7 +81,8 @@ public class RecipeService implements IRecipeService {
         }
 
         recipeRepository.save(recipe);
-        for (IngredientsInRecipes iir:recipe.getIngredientsInRecipe()) { // save all ingredientsInRecipe to DB
+        /* save all ingredientsInRecipe to DB */
+        for (IngredientsInRecipes iir:recipe.getIngredientsInRecipe()) {
             iir.setRecipe(recipe);
             iir.setIngredientName(ingredientRepository.findById(iir.getIngredientId()).get().getName());
             ingredientsInRecipesService.addIngredientsInRecipes(iir);

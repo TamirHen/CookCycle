@@ -19,6 +19,10 @@ public class UserController {
     @Autowired
     private IUserService userService;
 
+    /*
+     * Using post request to get by username.
+     * Username is an email so it must be sent within the body of the request.
+     */
     @PostMapping(path = "/getbyusername")
     public ResponseEntity<User> getUserByUsername(@RequestBody User userRequest) throws Throwable {
         User user = userService.getUserByUsername(userRequest.getUsername());
@@ -37,16 +41,13 @@ public class UserController {
         return new ResponseEntity<User>(dbUser, HttpStatus.CREATED);
     }
 
-    @PostMapping(path = "/getallfavoritesbyusername") // post request because username is an email so it must be sent within the body of the request.
+    /*
+    * Using post request to get all favorites by username.
+    * Username is an email so it must be sent within the body of the request.
+    */
+    @PostMapping(path = "/getallfavoritesbyusername")
     public ResponseEntity<List<Favorite>> getAllFavoritesByUsername(@RequestBody User userRequest) {
         List<Favorite> favorites = userService.getAllFavoritesByUsername(userRequest.getUsername());
         return new ResponseEntity<List<Favorite>>(favorites, HttpStatus.OK);
     }
-
-    @PutMapping("/update")
-    public ResponseEntity<User> updateArticle(@RequestBody User user) {
-        userService.updateUser(user);
-        return new ResponseEntity<User>(user, HttpStatus.OK);
-    }
-
 }

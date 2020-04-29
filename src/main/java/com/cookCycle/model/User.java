@@ -21,8 +21,11 @@ public class User {
         this.username = username;
     }
 
+    /*
+    * Overriding toString to prevent infinite loop with favorite.user.
+    */
     @Override
-    public String toString() { // Overriding toString to prevent infinite loop with favorite.user
+    public String toString() {
         return "User{" +
                 "username='" + username + '\'' +
                 ", favorites.size=" + favorites.size() +

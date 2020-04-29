@@ -49,7 +49,8 @@ public class RecipeTests {
                     false,
                     true
             ));
-            recipes.get(i-1).setId(new Long(i)); // set id manually (because DB responsible for this).
+            /* Set id manually (because DB responsible for this). */
+            recipes.get(i-1).setId(new Long(i));
         }
         Mockito.when(recipeMockRepository.findAll()).thenReturn(recipes);
         final List<Recipe> expected = recipeMockService.getAllRecipes();
@@ -79,6 +80,7 @@ public class RecipeTests {
                 false,
                 true
         );
+        /* Set id manually (because DB responsible for this). */
         recipe.setId(id);
         Mockito.when(recipeMockRepository.findById(id)).thenReturn(Optional.of(recipe));
         final Recipe expected = recipeMockService.getRecipeById(id);
@@ -107,6 +109,7 @@ public class RecipeTests {
                 false,
                 true
         );
+        /* Set id manually (because DB responsible for this). */
         recipe.setId(id);
         Mockito.when(recipeMockRepository.findById(id)).thenReturn(Optional.of(recipe));
         final Recipe expected = recipeMockService.getRecipeById(id);

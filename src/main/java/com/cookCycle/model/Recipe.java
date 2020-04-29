@@ -51,8 +51,11 @@ public class Recipe {
         this.isDairyFree = isDairyFree;
     }
 
+    /*
+    * Overriding toString to prevent infinite loop with ingredientInRecipe.Recipe.
+    */
     @Override
-    public String toString() { // Overriding toString to prevent infinite loop with ingredientInRecipe.Recipe
+    public String toString() {
         return "Recipe{" +
                 "id=" + id +
                 ", apiId=" + apiId +
