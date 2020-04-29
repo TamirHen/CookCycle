@@ -25,9 +25,9 @@ public class RecipeService implements IRecipeService {
     @Autowired
     private IngredientRepository ingredientRepository;
     @Autowired
-    private IngredientsInRecipesRepository ingredientsInRecipesRepository;
-    @Autowired
     private RecipeCategoryRepository recipeCategoryRepository;
+    @Autowired
+    private IngredientsInRecipesService ingredientsInRecipesService;
 
     @Override
     public List<Recipe> getAllRecipes() {
@@ -75,7 +75,7 @@ public class RecipeService implements IRecipeService {
         recipeRepository.save(recipe);
         for (IngredientsInRecipes iir:recipe.getIngredientsInRecipe()) { // save all ingredientsInRecipe to DB
             iir.setRecipe(recipe);
-            ingredientsInRecipesRepository.save(iir);
+            ingredientsInRecipesService.addIngredientsInRecipes(iir);
         }
 
         return recipe;

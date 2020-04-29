@@ -25,4 +25,8 @@ public class IngredientsInRecipesService implements IIngredientsInRecipesService
         IngredientsInRecipes obj = ingredientsInRecipesRepository.findById(ingredientsInRecipesId).get();
         return obj;
     }
+    @Override
+    public IngredientsInRecipes addIngredientsInRecipes(IngredientsInRecipes ingredientsInRecipes) {
+        return ingredientsInRecipesRepository.save(ingredientsInRecipes);
+    }
 }

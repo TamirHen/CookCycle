@@ -1,6 +1,7 @@
 package com.cookCycle.junitTests;
 
 import com.cookCycle.model.Favorite;
+import com.cookCycle.model.User;
 import com.cookCycle.repository.FavoriteRepository;
 import com.cookCycle.service.FavoriteService;
 import org.junit.Assert;
@@ -28,7 +29,7 @@ public class FavoriteTests {
     public void getAllFavoritesShouldReturnCorrectNumberOfFavorites() {
         final List<Favorite> favorites = new ArrayList<>();
         for (int i = 1; i <= 3; i++) {
-            favorites.add(new Favorite("test@cookcycle.com", new Long(i + 1)));
+            favorites.add(new Favorite(new User("test@cookcycle.com"), new Long(i + 1)));
             favorites.get(i-1).setId(new Long(i)); // set id manually (because DB responsible for this).
         }
         Mockito.when(favoriteMockRepository.findAll()).thenReturn(favorites);
@@ -40,7 +41,7 @@ public class FavoriteTests {
     @Test
     public void testThatWhenCallingGetFavoriteByIdItCallsFindByIdOnce() throws Throwable {
         final Long id = new Long(1);
-        final Favorite favorite = new Favorite("test@cookcycle.com", new Long(3));
+        final Favorite favorite = new Favorite(new User("test@cookcycle.com"), new Long(3));
         favorite.setId(id);
         Mockito.when(favoriteMockRepository.findById(id)).thenReturn(Optional.of(favorite));
         final Favorite expected = favoriteMockService.getFavoriteById(id);
@@ -50,7 +51,7 @@ public class FavoriteTests {
     @Test
     public void testThatWhenCallingGetFavoriteByIdItReturnsFavoriteObject() throws Throwable {
         final Long id = new Long(2);
-        final Favorite favorite = new Favorite("test@cookcycle.com", new Long(1));
+        final Favorite favorite = new Favorite(new User("test@cookcycle.com"), new Long(1));
         favorite.setId(id);
         Mockito.when(favoriteMockRepository.findById(id)).thenReturn(Optional.of(favorite));
         final Favorite expected = favoriteMockService.getFavoriteById(id);

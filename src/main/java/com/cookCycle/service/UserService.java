@@ -4,6 +4,7 @@ import com.cookCycle.model.Favorite;
 import com.cookCycle.model.User;
 import com.cookCycle.repository.FavoriteRepository;
 import com.cookCycle.repository.UserRepository;
+import com.cookCycle.service.Handler.FavoritesNotNullException;
 import com.cookCycle.service.Handler.UserAlreadyExist;
 import com.cookCycle.service.Handler.UserNotFoundException;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -40,11 +41,13 @@ public class UserService implements IUserService {
 
     @Override
     public User addUser(User user) {
+        if (user.getFavorites() != null) throw new FavoritesNotNullException();
         List<User> list = (List<User>) userRepository.findAll();
         for (User u:list) {
             if (user.getUsername().equals(u.getUsername())) throw new UserAlreadyExist(u.getUsername());
         }
-            return userRepository.save(user);
+
+        return userRepository.save(user);
     }
 
     @Override
@@ -64,7 +67,7 @@ public class UserService implements IUserService {
     public List<Favorite> getAllFavoritesByUsername(String username) {
         List<Favorite> list = new ArrayList<Favorite>();
         for (Favorite favorite:(List<Favorite>)favoriteRepository.findAll()) {
-            if (favorite.getUsername().equals(username)){
+            if (favorite.getUser().equals(username)){
                 list.add(favorite);
             }
         }

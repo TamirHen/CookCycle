@@ -2,9 +2,8 @@ package com.cookCycle.model;
 
 import lombok.Data;
 
-import javax.persistence.Entity;
-import javax.persistence.Id;
-import javax.persistence.Table;
+import javax.persistence.*;
+import java.util.List;
 
 @Data
 @Entity
@@ -13,11 +12,20 @@ public class User {
 
     @Id
     private String username;
-
+    @OneToMany(mappedBy = "user",fetch = FetchType.EAGER)
+    private List<Favorite> favorites;
     protected User() {
     }
 
     public User(String username) {
         this.username = username;
+    }
+
+    @Override
+    public String toString() { // Overriding toString to prevent infinite loop with favorite.user
+        return "User{" +
+                "username='" + username + '\'' +
+                ", favorites.size=" + favorites.size() +
+                '}';
     }
 }

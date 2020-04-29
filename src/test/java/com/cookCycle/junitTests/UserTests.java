@@ -1,5 +1,6 @@
 package com.cookCycle.junitTests;
 
+import com.cookCycle.model.Favorite;
 import com.cookCycle.model.User;
 import com.cookCycle.repository.UserRepository;
 import com.cookCycle.service.UserService;
