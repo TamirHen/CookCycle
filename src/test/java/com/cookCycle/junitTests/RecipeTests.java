@@ -29,7 +29,7 @@ public class RecipeTests {
     public void getAllRecipesShouldReturnCorrectNumberOfRecipes() {
         final List<Recipe> recipes = new ArrayList<>();
         final List<IngredientsInRecipes> ingredientsInRecipe = new ArrayList<>();
-        ingredientsInRecipe.add(new IngredientsInRecipes(new Long(1), new Double(1), "cup", "example"));
+        ingredientsInRecipe.add(new IngredientsInRecipes(new Long(1), "milk", new Double(1), "cup", "example"));
         for (int i = 1; i <= 3; i++) {
 
             recipes.add(new Recipe(
@@ -61,7 +61,7 @@ public class RecipeTests {
     public void testThatWhenCallingGetRecipeByIdItCallsFindByIdOnce() throws Throwable {
         final Long id = new Long(1);
         final List<IngredientsInRecipes> ingredientsInRecipe = new ArrayList<>();
-        ingredientsInRecipe.add(new IngredientsInRecipes(new Long(1), new Double(1), "cup", "example"));
+        ingredientsInRecipe.add(new IngredientsInRecipes(new Long(1), "milk", new Double(1), "cup", "example"));
         final Recipe recipe = new Recipe(
                 new Long(100),
                 "source for test",
@@ -89,7 +89,7 @@ public class RecipeTests {
     public void testThatWhenCallingGetRecipeByIdItReturnsRecipeObject() throws Throwable {
         final Long id = new Long(2);
         final List<IngredientsInRecipes> ingredientsInRecipe = new ArrayList<>();
-        ingredientsInRecipe.add(new IngredientsInRecipes(new Long(1), new Double(1), "cup", "example"));
+        ingredientsInRecipe.add(new IngredientsInRecipes(new Long(1), "milk", new Double(1), "cup", "example"));
         final Recipe recipe = new Recipe(
                 new Long(100),
                 "source for test",

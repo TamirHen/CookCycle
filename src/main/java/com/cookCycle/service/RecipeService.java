@@ -75,6 +75,7 @@ public class RecipeService implements IRecipeService {
         recipeRepository.save(recipe);
         for (IngredientsInRecipes iir:recipe.getIngredientsInRecipe()) { // save all ingredientsInRecipe to DB
             iir.setRecipe(recipe);
+            iir.setIngredientName(ingredientRepository.findById(iir.getIngredientId()).get().getName());
             ingredientsInRecipesService.addIngredientsInRecipes(iir);
         }
 
