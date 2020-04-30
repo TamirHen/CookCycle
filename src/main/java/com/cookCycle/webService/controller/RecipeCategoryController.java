@@ -18,7 +18,7 @@ public class RecipeCategoryController {
     private IRecipeCategoryService recipeCategoryService;
 
     @GetMapping(path = "/getbyid/{id}")
-    public ResponseEntity<RecipeCategory> getRecipeCategoryById(@PathVariable("id") Long id) {
+    public ResponseEntity<RecipeCategory> getRecipeCategoryById(@PathVariable("id") Long id) throws Throwable {
         RecipeCategory recipeCategory = recipeCategoryService.getRecipeCategoryById(id);
         return new ResponseEntity<RecipeCategory>(recipeCategory, HttpStatus.OK);
     }
@@ -30,3 +30,4 @@ public class RecipeCategoryController {
     }
 
 }
+//

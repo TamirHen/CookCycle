@@ -4,5 +4,5 @@ import java.util.List;
 
 public interface IRecipeCategoryService {
     List<RecipeCategory> getAllRecipeCategories();
-    RecipeCategory getRecipeCategoryById(Long recipeCategoryId);
+    RecipeCategory getRecipeCategoryById(Long recipeCategoryId) throws Throwable;
 }

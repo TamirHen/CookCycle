@@ -2,11 +2,13 @@ package com.cookCycle.service;
 
 import com.cookCycle.model.RecipeCategory;
 import com.cookCycle.repository.RecipeCategoryRepository;
+import com.cookCycle.service.Handler.RecipeCategoryNotFoundException;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.function.Supplier;
 
 @Service
 public class RecipeCategoryService implements IRecipeCategoryService {
@@ -21,8 +23,13 @@ public class RecipeCategoryService implements IRecipeCategoryService {
     }
 
     @Override
-    public RecipeCategory getRecipeCategoryById(Long recipeCategoryId) {
-        RecipeCategory obj = recipeCategoryRepository.findById(recipeCategoryId).get();
+    public RecipeCategory getRecipeCategoryById(Long recipeCategoryId) throws Throwable {
+        RecipeCategory obj = recipeCategoryRepository.findById(recipeCategoryId).orElseThrow(new Supplier<Throwable>() {
+            @Override
+            public Throwable get() {
+                return new RecipeCategoryNotFoundException(recipeCategoryId);
+            }
+        });
         return obj;
     }
 }
