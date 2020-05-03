@@ -59,7 +59,7 @@ public class RecipeTests {
     }
 
     @Test
-    public void testThatWhenCallingGetRecipeByIdItCallsFindByIdOnce() throws Throwable {
+    public void whenCallingGetRecipeByIdItCallsFindByIdOnce() throws Throwable {
         final Long id = new Long(1);
         final List<IngredientsInRecipes> ingredientsInRecipe = new ArrayList<>();
         ingredientsInRecipe.add(new IngredientsInRecipes(new Long(1), "milk", new Double(1), "cup", "example"));
@@ -88,7 +88,7 @@ public class RecipeTests {
     }
 
     @Test
-    public void testThatWhenCallingGetRecipeByIdItReturnsRecipeObject() throws Throwable {
+    public void whenCallingGetRecipeByIdItReturnsRecipeObject() throws Throwable {
         final Long id = new Long(2);
         final List<IngredientsInRecipes> ingredientsInRecipe = new ArrayList<>();
         ingredientsInRecipe.add(new IngredientsInRecipes(new Long(1), "milk", new Double(1), "cup", "example"));

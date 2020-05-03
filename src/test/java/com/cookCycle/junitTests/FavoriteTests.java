@@ -40,7 +40,7 @@ public class FavoriteTests {
     }
 
     @Test
-    public void testThatWhenCallingGetFavoriteByIdItCallsFindByIdOnce() throws Throwable {
+    public void whenCallingGetFavoriteByIdItCallsFindByIdOnce() throws Throwable {
         final Long id = new Long(1);
         final Favorite favorite = new Favorite(new User("test@cookcycle.com"), new Long(3));
         /* Set id manually (because DB responsible for this). */
@@ -51,7 +51,7 @@ public class FavoriteTests {
     }
 
     @Test
-    public void testThatWhenCallingGetFavoriteByIdItReturnsFavoriteObject() throws Throwable {
+    public void whenCallingGetFavoriteByIdItReturnsFavoriteObject() throws Throwable {
         final Long id = new Long(2);
         final Favorite favorite = new Favorite(new User("test@cookcycle.com"), new Long(1));
         /* Set id manually (because DB responsible for this). */

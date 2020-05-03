@@ -48,7 +48,7 @@ public class IngredientTests {
     }
 
     @Test
-    public void testThatWhenCallingGetIngredientByIdItCallsFindByIdOnce() throws Throwable {
+    public void whenCallingGetIngredientByIdItCallsFindByIdOnce() throws Throwable {
         final Long id = new Long(1);
         final Ingredient ingredient = new Ingredient(
                 new Long(200),
@@ -68,7 +68,7 @@ public class IngredientTests {
     }
 
     @Test
-    public void testThatWhenCallingGetIngredientByIdItReturnsIngredientObject() throws Throwable {
+    public void whenCallingGetIngredientByIdItReturnsIngredientObject() throws Throwable {
         final Long id = new Long(2);
         final Ingredient ingredient = new Ingredient(
                 new Long(200),
