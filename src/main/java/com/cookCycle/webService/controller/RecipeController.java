@@ -31,7 +31,7 @@ public class RecipeController {
     }
 
     @PostMapping(path = "/add")
-    public ResponseEntity<Recipe> addUser(@RequestBody Recipe recipe, UriComponentsBuilder builder) throws Throwable {
+    public ResponseEntity<Recipe> addUser(@RequestBody Recipe recipe) throws Throwable {
         Recipe dbRecipe = recipeService.addRecipe(recipe);
         return new ResponseEntity<Recipe>(dbRecipe, HttpStatus.CREATED);
     }

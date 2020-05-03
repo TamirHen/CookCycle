@@ -36,7 +36,7 @@ public class UserController {
     }
 
     @PostMapping(path = "/add")
-    public ResponseEntity<User> addUser(@RequestBody User user, UriComponentsBuilder builder) {
+    public ResponseEntity<User> addUser(@RequestBody User user) {
         User dbUser = userService.addUser(user);
         return new ResponseEntity<User>(dbUser, HttpStatus.CREATED);
     }
@@ -45,9 +45,9 @@ public class UserController {
     * Using post request to get all favorites by username.
     * Username is an email so it must be sent within the body of the request.
     */
-    @PostMapping(path = "/getallfavoritesbyusername")
-    public ResponseEntity<List<Favorite>> getAllFavoritesByUsername(@RequestBody User userRequest) {
-        List<Favorite> favorites = userService.getAllFavoritesByUsername(userRequest.getUsername());
+    @PostMapping(path = "/getfavoritesbyusername")
+    public ResponseEntity<List<Favorite>> getFavoritesByUsername(@RequestBody User userRequest) {
+        List<Favorite> favorites = userService.getFavoritesByUsername(userRequest.getUsername());
         return new ResponseEntity<List<Favorite>>(favorites, HttpStatus.OK);
     }
 }

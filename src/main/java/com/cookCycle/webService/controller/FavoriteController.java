@@ -30,7 +30,7 @@ public class FavoriteController {
     }
 
     @PostMapping(path = "/add")
-    public ResponseEntity<Favorite> addFavorite(@RequestBody Favorite favorite, UriComponentsBuilder builder) {
+    public ResponseEntity<Favorite> addFavorite(@RequestBody Favorite favorite) {
         Favorite dbFavorite = favoriteService.addFavorite(favorite);
         return new ResponseEntity<Favorite>(dbFavorite, HttpStatus.CREATED);
     }

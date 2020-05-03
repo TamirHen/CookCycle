@@ -9,5 +9,5 @@ public interface IUserService {
     List<User> getAllUsers();
     User getUserByUsername(String username) throws Throwable;
     User addUser(User user);
-    List<Favorite> getAllFavoritesByUsername(String username);
+    List<Favorite> getFavoritesByUsername(String username);
 }

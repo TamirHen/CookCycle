@@ -33,7 +33,7 @@ public class IngredientController {
     }
 
     @PostMapping(path = "/add")
-    public ResponseEntity<Ingredient> addIngredient(@RequestBody Ingredient ingredient, UriComponentsBuilder builder) throws Throwable {
+    public ResponseEntity<Ingredient> addIngredient(@RequestBody Ingredient ingredient) throws Throwable {
         Ingredient dbIngredient = ingredientService.addIngredient(ingredient);
         return new ResponseEntity<Ingredient>(dbIngredient, HttpStatus.CREATED);
     }

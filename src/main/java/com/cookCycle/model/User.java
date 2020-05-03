@@ -31,4 +31,5 @@ public class User {
                 ", favorites.size=" + favorites.size() +
                 '}';
     }
+
 }

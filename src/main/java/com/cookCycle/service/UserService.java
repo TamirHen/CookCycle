@@ -12,6 +12,7 @@ import org.springframework.stereotype.Service;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Optional;
 import java.util.function.Supplier;
 
 @Service
@@ -51,14 +52,7 @@ public class UserService implements IUserService {
     }
 
     @Override
-    public List<Favorite> getAllFavoritesByUsername(String username) {
-        List<Favorite> list = new ArrayList<Favorite>();
-        for (Favorite favorite:(List<Favorite>)favoriteRepository.findAll()) {
-            if (favorite.getUser().equals(username)){
-                list.add(favorite);
-            }
-        }
-        return list;
-
+    public List<Favorite> getFavoritesByUsername(String username) {
+        return favoriteRepository.getFavoritesByUser(userRepository.findById(username).get());
     }
 }
