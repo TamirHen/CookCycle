@@ -3,14 +3,10 @@ package com.cookCycle.service;
 import com.cookCycle.model.Ingredient;
 import com.cookCycle.model.IngredientsInRecipes;
 import com.cookCycle.model.Recipe;
-import com.cookCycle.model.RecipeCategory;
 import com.cookCycle.repository.IngredientRepository;
-import com.cookCycle.repository.IngredientsInRecipesRepository;
-import com.cookCycle.repository.RecipeCategoryRepository;
 import com.cookCycle.repository.RecipeRepository;
 import com.cookCycle.service.Handler.*;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.boot.web.servlet.server.Session;
 import org.springframework.stereotype.Service;
 
 import java.util.ArrayList;
@@ -22,12 +18,6 @@ import java.util.stream.Collectors;
 public class RecipeService implements IRecipeService {
     @Autowired
     private RecipeRepository recipeRepository;
-    @Autowired
-    private IngredientRepository ingredientRepository;
-    @Autowired
-    private RecipeCategoryRepository recipeCategoryRepository;
-    @Autowired
-    private IngredientsInRecipesService ingredientsInRecipesService;
 
     @Override
     public List<Recipe> getAllRecipes() {
@@ -47,47 +37,10 @@ public class RecipeService implements IRecipeService {
         return obj;
     }
 
-    /*
-     * Validations before recipe creation:
-     *   Checks that there is no recipe in the DB with the same apiId.
-     *   Check that recipe.getCategoryId exists.
-     *   Check that vegan recipe is also vegetarian and dairy free.
-     *   Check that all the ingredients in the DB.
-     *
-     */
+
     @Override
     public Recipe addRecipe(Recipe recipe) throws Throwable {
-        List<Recipe> list = (List<Recipe>) recipeRepository.findAll();
-        List<Ingredient> ingredients = (List<Ingredient>) ingredientRepository.findAll();
-        List<RecipeCategory> recipeCategories = (List<RecipeCategory>) recipeCategoryRepository.findAll();
-
-        for (Recipe r:list) {
-            if (recipe.getApiId().equals(r.getApiId())) throw new RecipeAlreadyExist(r.getId());
-        }
-        if (!(recipeCategories.stream().map(RecipeCategory::getId).collect(Collectors.toList()).contains(recipe.getCategoryId())))
-            throw new RecipeCategoryNotFoundException(recipe.getCategoryId());
-
-        if (recipe.getIsVegan() == true) {
-            if (recipe.getIsDairyFree() == false || recipe.getIsVegetarian() == false)
-                throw new RecipeVeganException(recipe);
-        }
-        for (IngredientsInRecipes iir:recipe.getIngredientsInRecipe()) {
-                ingredientRepository.findById(iir.getIngredientId()).orElseThrow(new Supplier<Throwable>() {
-                    @Override
-                    public Throwable get() {
-                        throw new IngredientNotFoundException(iir.getIngredientId());
-                    }
-                });
-        }
-
         recipeRepository.save(recipe);
-        /* save all ingredientsInRecipe to DB */
-        for (IngredientsInRecipes iir:recipe.getIngredientsInRecipe()) {
-            iir.setRecipe(recipe);
-            iir.setIngredientName(ingredientRepository.findById(iir.getIngredientId()).get().getName());
-            ingredientsInRecipesService.addIngredientsInRecipes(iir);
-        }
-
         return recipe;
     }
 }

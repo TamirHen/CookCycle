@@ -29,25 +29,18 @@ public class RecipeTests {
     public void getAllRecipesShouldReturnCorrectNumberOfRecipes() {
         final List<Recipe> recipes = new ArrayList<>();
         final List<IngredientsInRecipes> ingredientsInRecipe = new ArrayList<>();
-        ingredientsInRecipe.add(new IngredientsInRecipes(new Long(1), "milk", new Double(1), "cup", "example"));
+        ingredientsInRecipe.add(new IngredientsInRecipes("spaghetti"));
         for (int i = 1; i <= 3; i++) {
 
             recipes.add(new Recipe(
-                    new Long(100 + i),
-                    "source for test",
-                    "Spaghetti Bolognese",
+                    "test author",
+                    "spaghetti bolognese",
                     "Some instructions for spaghetti bolognese",
                     ingredientsInRecipe,
-                    4,
-                    10,
-                    10,
-                    new Long(1),
-                    "Some image url",
-                    "Italian",
-                    false,
-                    false,
-                    false,
-                    true
+                    "serves 4",
+                    "10 mins",
+                    "10 mins",
+                    "Some image url"
             ));
             /* Set id manually (because DB responsible for this). */
             recipes.get(i-1).setId(new Long(i));
@@ -62,23 +55,16 @@ public class RecipeTests {
     public void whenCallingGetRecipeByIdItCallsFindByIdOnce() throws Throwable {
         final Long id = new Long(1);
         final List<IngredientsInRecipes> ingredientsInRecipe = new ArrayList<>();
-        ingredientsInRecipe.add(new IngredientsInRecipes(new Long(1), "milk", new Double(1), "cup", "example"));
+        ingredientsInRecipe.add(new IngredientsInRecipes("spaghetti"));
         final Recipe recipe = new Recipe(
-                new Long(100),
-                "source for test",
-                "Spaghetti Bolognese",
+                "test author",
+                "spaghetti bolognese",
                 "Some instructions for spaghetti bolognese",
                 ingredientsInRecipe,
-                4,
-                10,
-                10,
-                new Long(1),
-                "Some image url",
-                "Italian",
-                false,
-                false,
-                false,
-                true
+                "serves 4",
+                "10 mins",
+                "10 mins",
+                "Some image url"
         );
         /* Set id manually (because DB responsible for this). */
         recipe.setId(id);
@@ -91,23 +77,16 @@ public class RecipeTests {
     public void whenCallingGetRecipeByIdItReturnsRecipeObject() throws Throwable {
         final Long id = new Long(2);
         final List<IngredientsInRecipes> ingredientsInRecipe = new ArrayList<>();
-        ingredientsInRecipe.add(new IngredientsInRecipes(new Long(1), "milk", new Double(1), "cup", "example"));
+        ingredientsInRecipe.add(new IngredientsInRecipes("spaghetti"));
         final Recipe recipe = new Recipe(
-                new Long(100),
-                "source for test",
-                "Spaghetti Bolognese",
+                "test author",
+                "spaghetti bolognese",
                 "Some instructions for spaghetti bolognese",
                 ingredientsInRecipe,
-                4,
-                10,
-                10,
-                new Long(1),
-                "Some image url",
-                "Italian",
-                false,
-                false,
-                false,
-                true
+                "serves 4",
+                "10 mins",
+                "10 mins",
+                "Some image url"
         );
         /* Set id manually (because DB responsible for this). */
         recipe.setId(id);

@@ -36,10 +36,6 @@ public class IngredientService implements IIngredientService {
 
     @Override
     public Ingredient addIngredient(Ingredient ingredient) throws Throwable {
-        List<Ingredient> ingredients = (List<Ingredient>) ingredientRepository.findAll();
-        for (Ingredient i:ingredients) {
-            if (i.getApiId().equals(ingredient.getApiId())) throw new IngredientAlreadyExist(i.getId());
-        }
         return ingredientRepository.save(ingredient);
     }
 }

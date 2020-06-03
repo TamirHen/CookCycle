@@ -29,14 +29,7 @@ public class IngredientTests {
         final List<Ingredient> ingredients = new ArrayList<>();
         for (int i = 1; i <= 3; i++) {
             ingredients.add(new Ingredient(
-                    new Long(200 + i),
-                    "butter",
-                    new Long(1),
-                    "Some image url",
-                    true,
-                    true,
-                    false,
-                    false
+                    "butter"
             ));
             /* Set id manually (because DB responsible for this). */
             ingredients.get(i-1).setId(new Long(i));
@@ -51,14 +44,7 @@ public class IngredientTests {
     public void whenCallingGetIngredientByIdItCallsFindByIdOnce() throws Throwable {
         final Long id = new Long(1);
         final Ingredient ingredient = new Ingredient(
-                new Long(200),
-                "butter",
-                new Long(1),
-                "Some image url",
-                true,
-                true,
-                false,
-                false
+                "butter"
         );
         /* Set id manually (because DB responsible for this). */
         ingredient.setId(id);
@@ -71,14 +57,7 @@ public class IngredientTests {
     public void whenCallingGetIngredientByIdItReturnsIngredientObject() throws Throwable {
         final Long id = new Long(2);
         final Ingredient ingredient = new Ingredient(
-                new Long(200),
-                "butter",
-                new Long(1),
-                "Some image url",
-                true,
-                true,
-                false,
-                false
+                "butter"
         );
         /* Set id manually (because DB responsible for this). */
         ingredient.setId(id);

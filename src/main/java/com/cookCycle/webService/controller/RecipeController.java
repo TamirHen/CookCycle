@@ -35,5 +35,4 @@ public class RecipeController {
         Recipe dbRecipe = recipeService.addRecipe(recipe);
         return new ResponseEntity<Recipe>(dbRecipe, HttpStatus.CREATED);
     }
-
 }

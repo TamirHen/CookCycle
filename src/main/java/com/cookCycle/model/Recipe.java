@@ -13,42 +13,40 @@ public class Recipe {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
-    private Long apiId;
-    private String apiSource;
-    private String title;
-    private String instructions;
+    private String author;
+    private String name;
+    private String method;
+    private String description;
+    private String difficulty;
     @OneToMany(mappedBy = "recipe",fetch = FetchType.EAGER)
     List<IngredientsInRecipes> ingredientsInRecipe;
-    private Integer serving;
-    private Integer preparationMinutes;
-    private Integer cookTimeMinutes;
-    private Long categoryId;
-    private String image;
-    private String cuisine;
-    private Boolean isGlutenFree;
-    private Boolean isVegetarian;
-    private Boolean isVegan;
-    private Boolean isDairyFree;
+    private String servings;
+    private String prepTime;
+    private String cookTime;
+    private String img_url;
+
+    private String fibre;
+    private String carbs;
+    private String sugars;
+    private String fat;
+    private String saturates;
+    private String protein;
+    private String salt;
+    private String kcal;
+
 
     protected Recipe() {
     }
 
-    public Recipe(Long apiId, String apiSource, String title, String instructions, List<IngredientsInRecipes> ingredientsInRecipe, Integer serving, Integer preparationMinutes, Integer cookTimeMinutes, Long categoryId, String image, String cuisine, Boolean isGlutenFree, Boolean isVegetarian, Boolean isVegan, Boolean isDairyFree) {
-        this.apiId = apiId;
-        this.apiSource = apiSource;
-        this.title = title;
-        this.instructions = instructions;
+    public Recipe(String author, String name, String method, List<IngredientsInRecipes> ingredientsInRecipe, String servings, String prepTime, String cookTime, String img_url) {
+        this.author = author;
+        this.name = name;
+        this.method = method;
         this.ingredientsInRecipe = ingredientsInRecipe;
-        this.serving = serving;
-        this.preparationMinutes = preparationMinutes;
-        this.cookTimeMinutes = cookTimeMinutes;
-        this.categoryId = categoryId;
-        this.image = image;
-        this.cuisine = cuisine;
-        this.isGlutenFree = isGlutenFree;
-        this.isVegetarian = isVegetarian;
-        this.isVegan = isVegan;
-        this.isDairyFree = isDairyFree;
+        this.servings = servings;
+        this.prepTime = prepTime;
+        this.cookTime = cookTime;
+        this.img_url = img_url;
     }
 
     /*
@@ -58,21 +56,14 @@ public class Recipe {
     public String toString() {
         return "Recipe{" +
                 "id=" + id +
-                ", apiId=" + apiId +
-                ", apiSource='" + apiSource + '\'' +
-                ", title='" + title + '\'' +
-                ", instructions='" + instructions + '\'' +
+                ", author='" + author + '\'' +
+                ", name='" + name + '\'' +
+                ", method='" + method + '\'' +
                 ", ingredientsInRecipe size=" + ingredientsInRecipe.size() +
-                ", serving=" + serving +
-                ", preparationMinutes=" + preparationMinutes +
-                ", cookTimeMinutes=" + cookTimeMinutes +
-                ", categoryId=" + categoryId +
-                ", image='" + image + '\'' +
-                ", cuisine='" + cuisine + '\'' +
-                ", isGlutenFree=" + isGlutenFree +
-                ", isVegetarian=" + isVegetarian +
-                ", isVegan=" + isVegan +
-                ", isDairyFree=" + isDairyFree +
+                ", servings=" + servings +
+                ", prepTime=" + prepTime +
+                ", cookTime=" + cookTime +
+                ", img_url='" + img_url + '\'' +
                 '}';
     }
 }

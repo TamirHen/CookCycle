@@ -15,21 +15,13 @@ public class IngredientsInRecipes {
     @ManyToOne
     @JoinColumn(name = "recipeId", nullable = false)
     private Recipe recipe;
-    private Long ingredientId;
-    private String ingredientName;
-    private Double amount;
-    private String unit;
-    private String unitAndAmountString;
+    private String string;
 
     protected IngredientsInRecipes() {
     }
 
-    public IngredientsInRecipes(Long ingredientId, String ingredientName, Double amount, String unit, String unitAndAmountString) {
-        this.ingredientId = ingredientId;
-        this.ingredientName = ingredientName;
-        this.amount = amount;
-        this.unit = unit;
-        this.unitAndAmountString = unitAndAmountString;
+    public IngredientsInRecipes(String string) {
+        this.string = string;
     }
 
     /*
