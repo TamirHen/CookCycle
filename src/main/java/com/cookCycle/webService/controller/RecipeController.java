@@ -1,5 +1,6 @@
 package com.cookCycle.webService.controller;
 
+import com.cookCycle.model.AvailableRecipe;
 import com.cookCycle.model.Recipe;
 import com.cookCycle.service.IRecipeService;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -34,5 +35,11 @@ public class RecipeController {
     public ResponseEntity<Recipe> addUser(@RequestBody Recipe recipe) throws Throwable {
         Recipe dbRecipe = recipeService.addRecipe(recipe);
         return new ResponseEntity<Recipe>(dbRecipe, HttpStatus.CREATED);
+    }
+
+    @GetMapping(path = "/getavailablerecipes")
+    public ResponseEntity<List<AvailableRecipe>> getAvailableRecipes(@RequestBody List<String> ingredients) throws Throwable {
+        List<AvailableRecipe> dbRecipes = recipeService.findRecipesWithIngredients(ingredients);
+        return new ResponseEntity<List<AvailableRecipe>>(dbRecipes, HttpStatus.OK);
     }
 }

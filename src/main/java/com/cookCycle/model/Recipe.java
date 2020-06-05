@@ -34,7 +34,6 @@ public class Recipe {
     private String salt;
     private String kcal;
 
-
     protected Recipe() {
     }
 
