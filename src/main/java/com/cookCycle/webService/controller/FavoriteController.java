@@ -8,6 +8,8 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.util.UriComponentsBuilder;
 
+import java.util.Dictionary;
+import java.util.HashMap;
 import java.util.List;
 
 @RestController
@@ -30,7 +32,7 @@ public class FavoriteController {
     }
 
     @PostMapping(path = "/add")
-    public ResponseEntity<Favorite> addFavorite(@RequestBody Favorite favorite) {
+    public ResponseEntity<Favorite> addFavorite(@RequestBody HashMap<String, String> favorite) throws Throwable {
         Favorite dbFavorite = favoriteService.addFavorite(favorite);
         return new ResponseEntity<Favorite>(dbFavorite, HttpStatus.CREATED);
     }

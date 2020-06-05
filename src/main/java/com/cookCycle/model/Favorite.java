@@ -31,4 +31,13 @@ public class Favorite {
     public String getUser() {
         return user.getUsername();
     }
+
+    @Override
+    public String toString() {
+        return "Favorite{" +
+                "id=" + id +
+                ", username=" + user.getUsername() +
+                ", recipeId=" + recipeId +
+                '}';
+    }
 }

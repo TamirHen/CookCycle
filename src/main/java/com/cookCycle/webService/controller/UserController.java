@@ -46,7 +46,7 @@ public class UserController {
     * Username is an email so it must be sent within the body of the request.
     */
     @PostMapping(path = "/getfavoritesbyusername")
-    public ResponseEntity<List<Favorite>> getFavoritesByUsername(@RequestBody User userRequest) {
+    public ResponseEntity<List<Favorite>> getFavoritesByUsername(@RequestBody User userRequest) throws Throwable {
         List<Favorite> favorites = userService.getFavoritesByUsername(userRequest.getUsername());
         return new ResponseEntity<List<Favorite>>(favorites, HttpStatus.OK);
     }

@@ -19,7 +19,7 @@ public class FavoriteAlreadyExist extends RuntimeException {
 
     }
 
-    public FavoriteAlreadyExist(Long similarId) {
-        super("This recipe already a favorite of this user. similar favoriteId: " + similarId);
+    public FavoriteAlreadyExist() {
+        super("This recipe already a favorite of this user.");
     }
 }

@@ -52,7 +52,13 @@ public class UserService implements IUserService {
     }
 
     @Override
-    public List<Favorite> getFavoritesByUsername(String username) {
-        return favoriteRepository.getFavoritesByUser(userRepository.findById(username).get());
+    public List<Favorite> getFavoritesByUsername(String username) throws Throwable {
+
+        return favoriteRepository.getFavoritesByUser(userRepository.findById(username).orElseThrow(new Supplier<Throwable>() {
+            @Override
+            public Throwable get() {
+                return new UserNotFoundException(username);
+            }
+        }));
     }
 }

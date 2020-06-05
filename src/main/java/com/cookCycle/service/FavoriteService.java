@@ -10,8 +10,8 @@ import com.cookCycle.service.Handler.*;
 //import org.graalvm.compiler.lir.LIRInstruction;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
-import java.util.ArrayList;
-import java.util.List;
+
+import java.util.*;
 import java.util.function.Supplier;
 import java.util.stream.Collectors;
 
@@ -42,33 +42,26 @@ public class FavoriteService implements IFavoriteService {
         return obj;
     }
 
-    /*
-    * Validations before favorite creation:
-    *   Checks that userRepository.findAll() doesn't return null.
-    *   Checks if the user exists.
-    *   Checks that recipeRepository.findAll() doesn't return null.
-    *   Checks if the recipe exists.
-    *   Checks if the user already have this favorite.
-    */
+
     @Override
-    public Favorite addFavorite(Favorite favorite) {
-        List<Favorite> favorites = (List<Favorite>) favoriteRepository.findAll();
-        List<User> users = (List<User>) userRepository.findAll();
-        List<Recipe> recipes = (List<Recipe>) recipeRepository.findAll();
+    public Favorite addFavorite(HashMap<String, String> favorite) throws Throwable {
+        List<Favorite> userFavorites = favoriteRepository.getAllByUser(userRepository.findById(favorite.get("username")).orElseThrow(new Supplier<Throwable>() {
+            @Override
+            public Throwable get() {
+                return new UserNotFoundException(favorite.get("username"));
+            }
+        }));
 
-        if (users == null) throw new NullPointerException("No users in the DB");
-        if (!(users.stream().map(User::getUsername).collect(Collectors.toList()).contains(favorite.getUser())))
-            throw new UserNotFoundException(favorite.getUser());
+        if (userFavorites.stream().map(f -> f.getRecipeId()).collect(Collectors.toList()).contains(Long.valueOf(favorite.get("recipeId"))))
+            throw new FavoriteAlreadyExist();
 
-        if (recipes == null) throw new NullPointerException("No recipes in the DB");
-        if (!(recipes.stream().map(Recipe::getId).collect(Collectors.toList()).contains(favorite.getRecipeId())))
-            throw new RecipeNotFoundException(favorite.getRecipeId());
 
-        for (Favorite f:favorites) {
-            if (favorite.getUser().equals(f.getUser()) && favorite.getRecipeId().equals(f.getRecipeId()))
-                throw new FavoriteAlreadyExist(f.getId());
-        }
-            return favoriteRepository.save(favorite);
+        return favoriteRepository.save(new Favorite(userRepository.findById(favorite.get("username")).orElseThrow(new Supplier<Throwable>() {
+            @Override
+            public Throwable get() {
+                return new UserNotFoundException(favorite.get("username"));
+            }
+        }), Long.valueOf(favorite.get("recipeId"))));
     }
 
     @Override
