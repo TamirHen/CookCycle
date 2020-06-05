@@ -6,20 +6,20 @@ import org.springframework.web.bind.annotation.ExceptionHandler;
 import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.bind.annotation.ResponseStatus;
 
-public class FavoriteNotFoundException extends RuntimeException {
+public class FavoriteNotFoundForThisUserException extends RuntimeException {
     @ControllerAdvice
-    static class FavoriteNotFoundHandler {
+    static class FavoriteNotFoundForThisUserHandler {
 
         @ResponseBody
-        @ExceptionHandler(FavoriteNotFoundException.class)
+        @ExceptionHandler(FavoriteNotFoundForThisUserException.class)
         @ResponseStatus(HttpStatus.NOT_FOUND)
-        String favoriteNotFoundHandler(FavoriteNotFoundException ex) {
+        String favoriteNotFoundForThisUserHandler(FavoriteNotFoundForThisUserException ex) {
             return ex.getMessage();
         }
 
     }
 
-    public FavoriteNotFoundException(Long id) {
-        super("No favorite with id: " + id);
+    public FavoriteNotFoundForThisUserException(String username, Long recipeId) {
+        super("No favorite with id: " + recipeId + " found for user: " + username);
     }
 }

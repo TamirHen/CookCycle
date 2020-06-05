@@ -35,10 +35,10 @@ public class FavoriteController {
         return new ResponseEntity<Favorite>(dbFavorite, HttpStatus.CREATED);
     }
 
-    @DeleteMapping("delete/{id}")
-    public ResponseEntity<Void> deleteFavorite(@PathVariable("id") Long id) throws Throwable {
-        favoriteService.deleteFavorite(id);
-        return new ResponseEntity<Void>(HttpStatus.NO_CONTENT);
+    @DeleteMapping("/delete")
+    public ResponseEntity<Void> deleteFavorite(@RequestBody Favorite favorite) throws Throwable {
+        favoriteService.deleteFavorite(favorite);
+        return new ResponseEntity<Void>(HttpStatus.OK);
     }
 
 }

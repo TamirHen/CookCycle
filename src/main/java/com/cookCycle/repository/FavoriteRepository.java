@@ -8,4 +8,6 @@ import java.util.List;
 
 public interface FavoriteRepository extends CrudRepository<Favorite, Long>{
     List<Favorite> getFavoritesByUser(User user);
+    Favorite getFirstByUserAndRecipeId(User user, Long recipeId);
+    List<Favorite> getAllByUser(User user);
 }

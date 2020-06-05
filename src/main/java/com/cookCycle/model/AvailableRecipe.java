@@ -23,5 +23,5 @@ public class AvailableRecipe {
         this.recipeId = recipeId;
         this.numOfMissingIngredients = numOfMissingIngredients;
     }
-    
+
 }

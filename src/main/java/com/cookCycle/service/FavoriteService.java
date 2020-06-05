@@ -6,10 +6,8 @@ import com.cookCycle.model.User;
 import com.cookCycle.repository.FavoriteRepository;
 import com.cookCycle.repository.RecipeRepository;
 import com.cookCycle.repository.UserRepository;
-import com.cookCycle.service.Handler.FavoriteAlreadyExist;
-import com.cookCycle.service.Handler.FavoriteNotFoundException;
-import com.cookCycle.service.Handler.RecipeNotFoundException;
-import com.cookCycle.service.Handler.UserNotFoundException;
+import com.cookCycle.service.Handler.*;
+//import org.graalvm.compiler.lir.LIRInstruction;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import java.util.ArrayList;
@@ -74,7 +72,19 @@ public class FavoriteService implements IFavoriteService {
     }
 
     @Override
-    public void deleteFavorite(Long favoriteId) throws Throwable {
-        favoriteRepository.delete(getFavoriteById(favoriteId));
+    public void deleteFavorite(Favorite favorite) throws Throwable {
+
+        User user = userRepository.findById(favorite.getUser()).orElseThrow(new Supplier<Throwable>() {
+            @Override
+            public Throwable get() {
+                return new UserNotFoundException(favorite.getUser());
+            }
+        });
+        if (!favoriteRepository.getAllByUser(user).stream().map(f -> f.getRecipeId()).collect(Collectors.toList()).contains(favorite.getRecipeId()))
+            throw new FavoriteNotFoundForThisUserException(favorite.getUser(), favorite.getRecipeId());
+        Favorite toDelete = favoriteRepository.getFirstByUserAndRecipeId(user, favorite.getRecipeId());
+        favoriteRepository.delete(toDelete);
+
+
     }
 }

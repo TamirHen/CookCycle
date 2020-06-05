@@ -8,5 +8,5 @@ public interface IFavoriteService {
     List<Favorite> getAllFavorites();
     Favorite getFavoriteById(Long favoriteId) throws Throwable;
     Favorite addFavorite(Favorite favorite);
-    void deleteFavorite(Long favoriteId) throws Throwable;
+    void deleteFavorite(Favorite favorite) throws Throwable;
 }
