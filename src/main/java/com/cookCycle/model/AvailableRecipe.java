@@ -14,6 +14,14 @@ import java.util.UUID;
         @ColumnResult(name = "numOfMissingIngredients", type = int.class)
 }))
 public class AvailableRecipe {
+    public Long getRecipeId() {
+        return recipeId;
+    }
+
+    public void setRecipeId(Long recipeId) {
+        this.recipeId = recipeId;
+    }
+
     private Long recipeId;
     private int numOfMissingIngredients;
 
@@ -24,4 +32,11 @@ public class AvailableRecipe {
         this.numOfMissingIngredients = numOfMissingIngredients;
     }
 
+    public Recipe getRecipe() {
+        return recipe;
+    }
+
+    public void setRecipe(Recipe recipe) {
+        this.recipe = recipe;
+    }
 }

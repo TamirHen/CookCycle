@@ -5,9 +5,9 @@ import lombok.Data;
 import javax.persistence.*;
 import java.util.List;
 
-@Data
 @Entity
 @Table(name="Recipe")
+@Data
 public class Recipe {
 
     @Id
@@ -64,5 +64,13 @@ public class Recipe {
                 ", cookTime=" + cookTime +
                 ", img_url='" + img_url + '\'' +
                 '}';
+    }
+
+    public Long getId() {
+        return id;
+    }
+
+    public void setId(Long id) {
+        this.id = id;
     }
 }

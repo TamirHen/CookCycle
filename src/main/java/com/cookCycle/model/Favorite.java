@@ -40,4 +40,7 @@ public class Favorite {
                 ", recipeId=" + recipeId +
                 '}';
     }
+    public Long getRecipeId() {
+        return this.recipeId;
+    }
 }

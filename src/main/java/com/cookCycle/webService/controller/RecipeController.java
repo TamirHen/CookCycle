@@ -22,24 +22,33 @@ public class RecipeController {
     @GetMapping(path = "/getbyid/{id}")
     public ResponseEntity<Recipe> getRecipeById(@PathVariable("id") Long id) throws Throwable {
         Recipe recipe = recipeService.getRecipeById(id);
-        return new ResponseEntity<Recipe>(recipe, HttpStatus.OK);
+        ResponseEntity<Recipe> response = new ResponseEntity<Recipe>(recipe, HttpStatus.OK);
+        System.out.println("GET Request: recipe/getbyid\nResponse: " + response.getStatusCode());
+        return response;
     }
 
     @GetMapping(path = "/getall")
     public ResponseEntity<List<Recipe>> getAllRecipes() {
         List<Recipe> list = recipeService.getAllRecipes();
-        return new ResponseEntity<List<Recipe>>(list, HttpStatus.OK);
+        ResponseEntity<List<Recipe>> response = new ResponseEntity<List<Recipe>>(list, HttpStatus.OK);
+        System.out.println("GET Request: recipe/getall\nResponse: " + response.getStatusCode());
+        return response;
     }
 
     @PostMapping(path = "/add")
     public ResponseEntity<Recipe> addUser(@RequestBody Recipe recipe) throws Throwable {
         Recipe dbRecipe = recipeService.addRecipe(recipe);
-        return new ResponseEntity<Recipe>(dbRecipe, HttpStatus.CREATED);
+        ResponseEntity<Recipe> response = new ResponseEntity<Recipe>(dbRecipe, HttpStatus.CREATED);
+        System.out.println("POST Request: recipe/add\nResponse: " + response.getStatusCode());
+        return response;
     }
 
-    @GetMapping(path = "/getavailablerecipes")
+    @PostMapping(path = "/getavailablerecipes")
     public ResponseEntity<List<AvailableRecipe>> getAvailableRecipes(@RequestBody List<String> ingredients) throws Throwable {
         List<AvailableRecipe> dbRecipes = recipeService.findRecipesWithIngredients(ingredients);
-        return new ResponseEntity<List<AvailableRecipe>>(dbRecipes, HttpStatus.OK);
+        ResponseEntity<List<AvailableRecipe>> response = new ResponseEntity<List<AvailableRecipe>>(dbRecipes, HttpStatus.OK);
+        System.out.println("POST Request: recipe/getavailablerecipes\nResponse: " + response.getStatusCode());
+        return response;
+
     }
 }
