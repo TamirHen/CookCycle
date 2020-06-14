@@ -44,11 +44,11 @@ public class FavoriteController {
         return response;
     }
 
-    @DeleteMapping("/delete")
+    @PostMapping("/delete")
     public ResponseEntity<Void> deleteFavorite(@RequestBody Favorite favorite) throws Throwable {
         favoriteService.deleteFavorite(favorite);
         ResponseEntity<Void> response = new ResponseEntity<Void>(HttpStatus.OK);
-        System.out.println("DELETE Request: favorite/delete\nResponse: " + response.getStatusCode());
+        System.out.println("Post Request: favorite/delete\nResponse: " + response.getStatusCode());
         return response;
 
     }
